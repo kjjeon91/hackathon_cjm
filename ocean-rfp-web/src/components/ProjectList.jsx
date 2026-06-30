@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { projects, agencyColor, AGENCIES } from '../data/projects.js'
 import { SearchIcon } from './icons.jsx'
 
-export default function ProjectList({ list, onOpen, agencies = [], onAgency, onClearAgency, onSearch }) {
+export default function ProjectList({ list, onOpen, agencies = [], onAgency, onClearAgency, query = '', onSearch }) {
   const isOn = (a) => agencies.some((x) => x.label === a.label)
   // 입력값(text)과 실제 적용 검색어 분리 — 제출 시에만 필터 적용
   const [text, setText] = useState('')
@@ -14,6 +14,13 @@ export default function ProjectList({ list, onOpen, agencies = [], onAgency, onC
     setText('')
     onSearch('')
   }
+  // 전체 초기화 — 검색어 + 발주처 필터 모두 해제
+  const active = agencies.length > 0 || query.trim() !== ''
+  const resetAll = () => {
+    setText('')
+    onSearch('')
+    onClearAgency()
+  }
 
   return (
     <div className="glass">
@@ -21,6 +28,7 @@ export default function ProjectList({ list, onOpen, agencies = [], onAgency, onC
         <h2>
           <span className="k">› </span>프로젝트 목록
           <span className="cnt">{list.length}건</span>
+          {query.trim() && <span className="filteron">· 검색 “{query.trim()}”</span>}
         </h2>
         <form className="search" onSubmit={submit}>
           <button type="submit" className="search-go" title="검색">
@@ -53,7 +61,10 @@ export default function ProjectList({ list, onOpen, agencies = [], onAgency, onC
           </button>
         ))}
         {agencies.length > 0 && (
-          <button className="clearfilter" onClick={onClearAgency} title="기관 필터 해제">✕ 해제</button>
+          <button className="clearfilter" onClick={onClearAgency} title="발주처 필터만 해제">✕ 발주처</button>
+        )}
+        {active && (
+          <button className="reset-all" onClick={resetAll} title="검색·필터 전체 초기화">↺ 초기화</button>
         )}
       </div>
 

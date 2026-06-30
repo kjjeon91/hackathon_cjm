@@ -36,6 +36,7 @@ export default function MainScreen({ onOpen, agencies, onAgency, onClearAgency }
           agencies={agencies}
           onAgency={onAgency}
           onClearAgency={onClearAgency}
+          query={query}
           onSearch={setQuery}
         />
         <LlmPanel count={list.length} />

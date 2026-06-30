@@ -126,6 +126,9 @@ h1 em { font-style: normal; color: var(--blue); }
 .agency-btn.on .agency-dot { background: #fff !important; }
 .clearfilter { display: inline-flex; align-items: center; background: var(--white); border: 1px solid var(--fog); border-radius: var(--r-pill); font-size: 12px; font-weight: 600; color: var(--slate); padding: 6px 13px; }
 .clearfilter:hover { background: var(--ice); color: var(--navy); }
+.reset-all { margin-left: auto; display: inline-flex; align-items: center; gap: 5px; background: var(--blue); border: 0; border-radius: var(--r-pill); font-size: 12px; font-weight: 700; color: #fff; padding: 7px 15px; box-shadow: var(--sh-btn); }
+.reset-all:hover { box-shadow: 0 6px 16px rgba(78, 154, 217, 0.35); }
+.filteron { font-size: 13px; font-weight: 700; color: var(--blue); margin-left: 8px; }
 
 /* ---------- project rows ---------- */
 .row { display: grid; grid-template-columns: 46px 1fr 96px 150px 44px; align-items: center; padding: 17px 22px; border-bottom: 1px solid var(--fog); transition: background 0.15s; text-align: left; width: 100%; background: transparent; border-left: 0; border-right: 0; border-top: 0; color: inherit; }
