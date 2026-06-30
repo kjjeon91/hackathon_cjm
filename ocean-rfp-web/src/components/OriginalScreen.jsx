@@ -13,6 +13,30 @@ function InfoCard({ title, items }) {
   )
 }
 
+// 원문을 구조(대제목/중제목/항목/하위/비고)로 구분 렌더링
+function lineClass(t) {
+  if (/^[가-힣]\.\s/.test(t) || /^[ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩ]+\./.test(t)) return 'ol-h1' // 가. 나. 다.
+  if (/^\d+\)/.test(t)) return 'ol-h2' // 1) 2)
+  if (/^\d+\.\s/.test(t)) return 'ol-h2' // 1. 2.
+  if (/^[○◦●]/.test(t)) return 'ol-o' // ○ 주요 항목
+  if (/^[-]\s/.test(t)) return 'ol-dash' // - 하위
+  if (/^[*※]/.test(t)) return 'ol-note' // * ※ 비고
+  return 'ol-p'
+}
+
+function OriginalDoc({ text }) {
+  const lines = text.split('\n')
+  return (
+    <div className="doc">
+      {lines.map((raw, i) => {
+        const t = raw.trim()
+        if (t === '') return <div key={i} className="ol-gap" />
+        return <div key={i} className={lineClass(t)}>{t}</div>
+      })}
+    </div>
+  )
+}
+
 export default function OriginalScreen({ id, onBack, onSummary }) {
   const p = getProject(id)
   if (!p) return null
@@ -23,21 +47,15 @@ export default function OriginalScreen({ id, onBack, onSummary }) {
 
       <div className="head">
         <div>
-          <div className="eyebrow">Page 3 · Original Document</div>
-          <h1>{p.name} <em>원본</em></h1>
-          <p>원문 사업내용 전체를 그대로 표출합니다. (표출 전용 · 편집 불가)</p>
+          <h1>{p.name}</h1>
         </div>
       </div>
 
       <div className="glass section">
         <div className="shead">
-          <span className="num">원문</span>
-          <div>
-            <h2>원본 사업내용</h2>
-            <div className="src">표출 구간 · {p.section}</div>
-          </div>
+          <span className="doc-badge">사업내용</span>
         </div>
-        <div className="raw">{p.original}</div>
+        <OriginalDoc text={p.original} />
       </div>
 
       <div className="info-grid">

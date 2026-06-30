@@ -191,8 +191,29 @@ h1 em { font-style: normal; background: linear-gradient(110deg, var(--cy2), var(
 .shead h2 { font-size: 17px; font-weight: 900; color: #eaf1ff; }
 .shead .src { color: var(--muted2); font-size: 12px; margin-top: 3px; }
 .raw { white-space: pre-wrap; font-family: 'Noto Sans KR', Pretendard, system-ui, sans-serif; line-height: 1.85; font-size: 14.5px; padding: 24px; color: #c9d6ea; max-height: 760px; overflow: auto; tab-size: 2; }
-.raw::-webkit-scrollbar { width: 10px; }
-.raw::-webkit-scrollbar-thumb { background: rgba(140, 160, 255, 0.25); border-radius: 8px; }
+
+/* 사업내용 배지 */
+.doc-badge { display: inline-flex; align-items: center; padding: 8px 16px; border-radius: 11px; font-weight: 800; font-size: 14px; color: #070b16; background: linear-gradient(135deg, #3ddccb, #7a8cff); box-shadow: 0 6px 16px rgba(90, 150, 255, 0.3); }
+
+/* 구조 구분 원문 본문 */
+.doc { padding: 10px 28px 28px; max-height: 820px; overflow: auto; }
+.doc::-webkit-scrollbar { width: 10px; }
+.doc::-webkit-scrollbar-thumb { background: rgba(140, 160, 255, 0.25); border-radius: 8px; }
+.ol-gap { height: 8px; }
+/* 대제목 (가. 다. / 로마자) */
+.ol-h1 { font-size: 18px; font-weight: 900; color: #fff; margin: 28px 0 14px; padding: 0 0 10px 14px; border-bottom: 1px solid rgba(150, 180, 235, 0.18); position: relative; letter-spacing: -0.01em; }
+.ol-h1::before { content: ''; position: absolute; left: 0; top: 2px; bottom: 12px; width: 4px; border-radius: 3px; background: linear-gradient(180deg, var(--cy), var(--vi)); }
+.doc > .ol-h1:first-child { margin-top: 6px; }
+/* 중제목 (1) 2) / 1. ) */
+.ol-h2 { font-size: 15.5px; font-weight: 800; color: var(--cy2); margin: 20px 0 8px; }
+/* ○ 주요 항목 */
+.ol-o { font-size: 14.5px; font-weight: 600; color: #e6eefb; line-height: 1.7; margin-top: 10px; padding-left: 4px; }
+/* - 하위 항목 */
+.ol-dash { font-size: 14px; color: #aebfd6; line-height: 1.65; margin-top: 5px; padding-left: 22px; }
+/* * ※ 비고 */
+.ol-note { font-size: 13px; color: #9fb0d8; line-height: 1.6; margin: 8px 0; padding: 7px 13px; border-left: 2px solid rgba(140, 160, 255, 0.5); background: rgba(111, 123, 255, 0.07); border-radius: 0 8px 8px 0; }
+/* 기타 본문 */
+.ol-p { font-size: 14px; color: #c9d6ea; line-height: 1.62; margin-top: 4px; }
 
 /* --- action buttons --- */
 .actions { display: flex; gap: 12px; justify-content: center; margin: 26px 0 0; }
