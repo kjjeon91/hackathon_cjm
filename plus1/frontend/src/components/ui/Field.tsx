@@ -26,8 +26,7 @@ export function Input({ className, ...props }: InputHTMLAttributes<HTMLInputElem
     <input
       className={cn(
         'h-11 w-full rounded-2xl border border-line bg-white px-3.5 text-base text-ink',
-        'placeholder:text-muted/70 transition-colors',
-        'focus:border-blue/50 focus-ring',
+        'placeholder:text-muted/70 input-glow',
         className,
       )}
       {...props}

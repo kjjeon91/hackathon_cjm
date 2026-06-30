@@ -1,19 +1,58 @@
 import { useNavigate } from 'react-router-dom';
+import { useApp } from '@/context/AppContext';
 import { Card, CardBody, CardHeader } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { RadarChart } from '@/components/ui/RadarChart';
 import { SummaryInsights } from '@/components/SummaryInsights';
 import { Reveal } from '@/components/Reveal';
+import { ApprovalLine } from '@/components/ApprovalLine';
 import { IconRadar, IconChart, IconArrowRight } from '@/components/Icons';
 import { SUMMARY_AXES, SUMMARY_COLOR, SUMMARY_NARRATIVE } from '@/data/seed';
 import { comprehensiveScores } from '@/lib/selectors';
 
 export function SummaryPage() {
   const navigate = useNavigate();
+  const { reviewers } = useApp();
   const scores = comprehensiveScores();
+
+  const approvalNodes = [
+    {
+      step: '1차',
+      label: '부서장',
+      name: reviewers.dept,
+      initial: reviewers.dept.charAt(0),
+      status: 'done' as const,
+    },
+    {
+      step: '2차',
+      label: '행정부',
+      name: reviewers.admin,
+      initial: reviewers.admin.charAt(0),
+      status: 'done' as const,
+    },
+    {
+      step: '3차',
+      label: '부문장',
+      name: reviewers.exec,
+      initial: reviewers.exec.charAt(0),
+      status: 'done' as const,
+    },
+    {
+      step: '최종',
+      label: '대표',
+      name: '대표이사',
+      initial: '대',
+      status: 'active' as const,
+    },
+  ];
 
   return (
     <div className="space-y-6">
+      {/* 결재 라인 */}
+      <Reveal>
+        <ApprovalLine nodes={approvalNodes} />
+      </Reveal>
+
       <div className="grid grid-cols-1 gap-6 xl:grid-cols-5">
         <Reveal className="xl:col-span-2">
           <Card>

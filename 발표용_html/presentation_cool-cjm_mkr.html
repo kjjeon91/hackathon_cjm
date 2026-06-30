@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>해양 RFP 인텔리전스 — 발표자료 (cool-cjm · 마경림)</title>
+<style>
+:root{
+  --navy:#0b3658;--blue:#4e9ad9;--blue2:#2563eb;--aqua:#22c7ba;
+  --card:#fff;--line:#dde7ee;--text:#0f1d2a;--muted:#486984;
+  --green:#16a34a;--amber:#f59e0b;--red:#dc2626;--purple:#7c3aed;
+  --ice:#e6f1fa;--fog:#f1f7fc;
+  --shadow:0 18px 46px rgba(11,54,88,.12)
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--fog);color:var(--text);font-family:Pretendard,"Noto Sans KR",system-ui,sans-serif;line-height:1.6}
+a{color:inherit}
+
+/* Cover */
+.cover{background:radial-gradient(circle at 85% 18%,rgba(78,154,217,.40),transparent 30%),linear-gradient(135deg,#0b3658,#0d4a78,#4e9ad9);color:#fff;padding:48px 42px 40px}
+.cover .tag{display:inline-block;border:1px solid rgba(255,255,255,.30);background:rgba(255,255,255,.12);padding:8px 14px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.02em}
+.cover h1{font-size:40px;letter-spacing:-.04em;margin:16px 0 8px;line-height:1.15}
+.cover .sub{font-size:18px;color:#dcecfb;font-weight:700;margin:0 0 14px}
+.cover p{max-width:1080px;color:#cfe4f7;margin:0}
+.cover .meta{margin-top:22px;display:flex;gap:10px;flex-wrap:wrap}
+.cover .meta span{border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.08);border-radius:999px;padding:7px 13px;font-size:13px;font-weight:700;color:#eaf4ff}
+
+main{max-width:1340px;margin:auto;padding:28px}
+section{margin-bottom:22px}
+.card{background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:26px}
+h2{font-size:24px;letter-spacing:-.03em;margin:0 0 6px;display:flex;align-items:center;gap:10px}
+h2 .n{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:10px;background:var(--navy);color:#fff;font-size:15px}
+.lead{color:var(--muted);margin:0 0 18px;font-size:14.5px}
+h3{font-size:17px;margin:0 0 10px;color:var(--navy)}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+
+/* Why cards */
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.why div{border:1px solid var(--line);background:var(--fog);border-radius:16px;padding:16px}
+.why b{display:block;color:var(--navy);font-size:15px;margin-bottom:6px}
+.why span{color:#3b556e;font-size:13.5px}
+
+/* Product cards */
+.prod{border:1px solid var(--line);border-radius:20px;padding:22px;background:linear-gradient(180deg,#fff, #f7fbff)}
+.prod .head{display:flex;align-items:center;gap:13px;margin-bottom:6px}
+.prod .badgeic{flex:none;display:inline-grid;place-items:center;width:46px;height:46px;border-radius:14px;font-size:22px;box-shadow:0 6px 16px rgba(11,54,88,.16)}
+.prod.a .badgeic{background:linear-gradient(135deg,#0d4a78,#4e9ad9);color:#fff}
+.prod.b .badgeic{background:linear-gradient(135deg,#0f7a52,#34c98a);color:#fff}
+.prod h3{font-size:21px;margin:0;letter-spacing:-.02em;line-height:1.2}
+.prod .role{font-size:13px;color:var(--muted);margin:0 0 14px;padding-left:59px}
+@media(max-width:1000px){.prod .role{padding-left:0}}
+.prod ul{margin:0;padding-left:18px}
+.prod li{margin:6px 0;font-size:14px}
+.prod li b{color:var(--navy)}
+.mine{margin-top:14px;border-top:1px dashed var(--line);padding-top:12px}
+.mine .lbl{display:inline-block;font-size:11px;font-weight:800;color:#fff;background:var(--blue);border-radius:6px;padding:3px 8px;margin-bottom:6px}
+.prod.b .mine .lbl{background:var(--green)}
+.prod.a .mine .lbl{background:var(--muted)}
+.mine p{margin:0;font-size:13.5px;color:#2b4258}
+.mine.learn{background:var(--fog);border:1px solid var(--line);border-top:1px solid var(--line);border-radius:14px;padding:13px 14px;margin-top:14px}
+.mine.learn .lbl{background:#92600c}
+.mine.learn p+p{margin-top:7px}
+
+/* Pipeline */
+.pipe{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;align-items:stretch}
+.step{position:relative;border:1px solid var(--line);background:#fff;border-radius:16px;padding:16px 14px;text-align:center}
+.step .ic{display:inline-grid;place-items:center;width:38px;height:38px;border-radius:12px;background:var(--ice);color:var(--navy);font-size:18px;font-weight:900;margin-bottom:8px}
+.step b{display:block;font-size:14px;color:var(--navy);margin-bottom:4px}
+.step span{display:block;font-size:12px;color:var(--muted);line-height:1.45}
+.step .tool{display:block;margin-top:8px;font-size:11px;color:#5b7794;font-weight:700}
+.pipe .arrow{display:none}
+
+/* Table */
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.tbl th{background:var(--ice);text-align:left;padding:11px 12px;border:1px solid #cfe0ef;color:var(--navy);font-weight:800}
+.tbl td{padding:11px 12px;border:1px solid #e3ecf5;vertical-align:top;line-height:1.55}
+.tbl tr:nth-child(even) td{background:#fafcff}
+.pill{display:inline-block;border-radius:999px;padding:3px 9px;font-size:11px;font-weight:800}
+.pill.r{background:#fee2e2;color:#991b1b}.pill.g{background:#dcfce7;color:#166534}.pill.b{background:var(--ice);color:#0d4a78}
+
+/* Strength */
+.str{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.str div{border:1px solid var(--line);border-radius:16px;padding:16px;background:#fff}
+.str b{display:block;color:var(--navy);margin-bottom:6px;font-size:15px}
+.str b .em{color:var(--blue)}
+.str span{font-size:13.5px;color:#3b556e}
+
+/* Stack chips */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips span{border:1px solid var(--line);background:var(--fog);border-radius:8px;padding:7px 12px;font-size:13px;font-weight:700;color:#2b4258}
+
+.foot{color:var(--muted);font-size:12.5px;text-align:center;padding:8px 0 30px}
+
+@media(max-width:1000px){
+  .grid2,.grid3,.why,.str{grid-template-columns:1fr}
+  .pipe{grid-template-columns:1fr 1fr}
+  .cover h1{font-size:30px}
+}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <span class="tag">예보사업부 AI·AX 해커톤 · 발표자료</span>
+  <h1>해양 RFP 인텔리전스</h1>
+  <p class="sub">공고문(RFP)을 “읽고 → 분석하고 → 의사결정”까지 잇는 두 개의 웹 산출물</p>
+  <p>흩어진 한글파일을 사람이 직접 읽고 정리하던 입찰·R&amp;D 검토 업무를, <b>PDF 자동 파싱 → 구조화 추출 → DB → 시각화 대시보드 → 역할별 정량 의사결정</b>으로 전환했습니다.</p>
+  <div class="meta">
+    <span>팀 · cool-cjm</span>
+    <span>작성자 · 마경림 (mkr)</span>
+    <span>담당 · 데이터 파이프라인(agent1·2·DB) + 수주검토 플랫폼 프론트엔드</span>
+  </div>
+</div>
+
+<main>
+
+  <!-- WHY -->
+  <section class="card">
+    <h2><span class="n">1</span> 왜 만들게 되었나</h2>
+    <p class="lead">기존 위험요소·수주 검토는 “문서 작성 중심”의 수작업이었습니다. 우리는 이걸 “수주 의사결정 중심”의 자동화 체계로 바꾸는 것을 목표로 했습니다.</p>
+    <div class="why">
+      <div><b>① 흩어진 문서</b><span>담당자가 내 PC에서 한글/PDF 공고문을 찾아 열고, 사업개요·예산·기간·과업·평가배점을 직접 읽어 옮겨 적었습니다.</span></div>
+      <div><b>② 주관적 판단</b><span>참여 여부·위험도 점수가 개인 경험에 의존해 일관성이 떨어지고, 근거 추적이 안 됐습니다.</span></div>
+      <div><b>③ 반복 재작성</b><span>체크리스트 → 보고서를 매번 다시 쓰고, 결재 자료를 손으로 정리했습니다.</span></div>
+    </div>
+  </section>
+
+  <!-- TWO PRODUCTS -->
+  <section class="card">
+    <h2><span class="n">2</span> 두 개의 산출물</h2>
+    <p class="lead">하나는 “이미 분석된 RFP를 보여주는” 표출형 대시보드, 다른 하나는 “보면서 참여를 결정하는” 의사결정 플랫폼입니다. 같은 데이터 파이프라인 위에 올라갑니다.</p>
+    <div class="grid2">
+
+      <div class="prod a">
+        <div class="head">
+          <span class="badgeic">📑</span>
+          <h3>RFP 대시보드</h3>
+        </div>
+        <p class="role">분석된 해양 RFP를 웹으로 보여주는 read-only 대시보드 — 데이터 계층 연동을 시도</p>
+        <ul>
+          <li><b>3화면 구조</b> — 문서 목록 → 사업요약+용어해설 → 원본 전문</li>
+          <li><b>문서 카드</b> — 발주처·예산·마감·문서유형(용역/R&amp;D) 배지, 다중선택 필터·검색</li>
+          <li><b>사업 요약</b> — 5줄 요약·핵심 과업·리스크·KPI 덱, 원문 근거 표시</li>
+          <li><b>AI 어시스턴트 패널</b> — 검색/LLM은 시각 목업(표출 전용)</li>
+        </ul>
+        <div class="mine learn">
+          <span class="lbl">시도했지만 채택되진 못함 → 다음엔 이렇게</span>
+          <p>내가 만든 <b>데이터 계층(agent1 파싱 → agent2 분석 → SQLite DB)과 조회 가이드(query API 9종)</b>를 대시보드에 붙이려 했지만, 최종 결과물 기준에는 못 미쳐 <b>실제로 채택되진 못했습니다.</b></p>
+          <p><b>배운 구조:</b> 다음엔 ① 표현 계층과 데이터 계약(JSON 스키마)을 <b>먼저 합의</b>하고 ② 대시보드가 mock으로 화면을 완성한 뒤 ③ 같은 계약 위에서 mock↔실데이터를 교체하면, 파이프라인 노력이 그대로 화면에 연결됩니다.</p>
+        </div>
+      </div>
+
+      <div class="prod b">
+        <div class="head">
+          <span class="badgeic">🧭</span>
+          <h3>수주검토 의사결정 플랫폼</h3>
+        </div>
+        <p class="role">공고문을 올리면 역할별로 정량 평가하고 자동 결과보고서를 생성하는 React 플랫폼</p>
+        <ul>
+          <li><b>6단계 플로우</b> — 업로드+평가자 지정 → 사업개요 → 부서장 → 행정부 → 부문장 → 결과보고서 설정</li>
+          <li><b>역할별 정량평가</b> — 18개 검토항목 + 종합 6축, <b>레이더 차트</b> 시각화</li>
+          <li><b>예산 자동 산정</b> — 전체 예산 × 부서 예산비율 자동 계산</li>
+          <li><b>자동 결과보고서</b> — 결재란 포함 별도 보고서 + 결재 상신 흐름</li>
+        </ul>
+        <div class="mine">
+          <span class="lbl">내가 한 역할</span>
+          <p>plus1 명세(.md/.html)를 분석해 <b>designer 서브에이전트에 React 멀티파일 빌드를 위임</b>하고, 이후 <b>cord 스타일 디자인 토큰으로 전 컴포넌트를 리테마</b>(navy/signal-blue) 하며 직접 구현·검증했습니다.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PIPELINE -->
+  <section class="card">
+    <h2><span class="n">3</span> 전체 파이프라인 구성</h2>
+    <p class="lead">PDF 한 장에서 의사결정 화면까지 — 결정적(재현 가능)으로 흐르도록 설계했습니다. 같은 PDF·같은 순서면 누구나 같은 결과를 냅니다.</p>
+    <div class="pipe">
+      <div class="step">
+        <div class="ic">📄</div><b>agent1 · 파싱</b>
+        <span>업로드 PDF를 페이지·표·목차·근거로 평탄화</span>
+        <span class="tool">opendataloader-pdf (100% 로컬)</span>
+      </div>
+      <div class="step">
+        <div class="ic">🧩</div><b>agent2 · 분석</b>
+        <span>문서분류·9종 추출·요약·누락위험을 고정 JSON 스키마로</span>
+        <span class="tool">HYBRID(파서+정규식) / Claude tool use / Ollama</span>
+      </div>
+      <div class="step">
+        <div class="ic">🗄️</div><b>DB 적재</b>
+        <span>표준 field_name으로 11개 테이블에 적재(재적재 idempotent)</span>
+        <span class="tool">SQLite (stdlib, 의존성 0)</span>
+      </div>
+      <div class="step">
+        <div class="ic">🔎</div><b>조회 API</b>
+        <span>화면 탭 ↔ 함수 1:1 매핑된 query 함수 9종</span>
+        <span class="tool">query.py · README 가이드</span>
+      </div>
+      <div class="step">
+        <div class="ic">📊</div><b>표현 계층</b>
+        <span>수주검토 플랫폼(완성) · RFP 대시보드(연동 시도)</span>
+        <span class="tool">React + Vite + Tailwind</span>
+      </div>
+    </div>
+    <p class="lead" style="margin:16px 0 0">검증(RD1.pdf): 37페이지·표 20개·목차 66·근거 120 추출 → <b>R&amp;D 분류 conf 1.0</b>, 예산 150억, 평가배점 7항목, 과업 27건, 9종 스키마 100% PASS, 배점 합계 100=100 일치.</p>
+  </section>
+
+  <!-- 시행착오 -->
+  <section class="card">
+    <h2><span class="n">4</span> 시행착오와 해결</h2>
+    <p class="lead">막혔던 지점과, 그걸 어떻게 우회/개선했는지가 곧 우리 파이프라인의 설계 근거가 되었습니다.</p>
+    <table class="tbl">
+      <tr><th style="width:22%">막힌 지점</th><th style="width:40%">무엇이 문제였나</th><th>해결 / 깨달음</th></tr>
+      <tr>
+        <td><span class="pill r">로컬 자원</span> 대형 모델 불가</td>
+        <td>MiMo-V2-Flash(309B)는 GPU 8장 필요 — M1·8GB에서 실행 불가</td>
+        <td>로컬 소형 모델(Ollama qwen2.5:3b)로 실증 → 완전 무료·오프라인 추론 성공</td>
+      </tr>
+      <tr>
+        <td><span class="pill r">품질</span> 소형 LLM의 표 추출</td>
+        <td>3B 모델이 평가배점표를 뭉개고 예산·발주처를 0/빈값으로 채움</td>
+        <td><b>HYBRID 전환</b> — 정형값은 파서+정규식으로 결정적 추출, 서술 요약만 LLM (추출 14→41건)</td>
+      </tr>
+      <tr>
+        <td><span class="pill b">환경</span> Python 버전</td>
+        <td>로컬 Python 3.9는 opendataloader-pdf(3.10+) 미지원</td>
+        <td>시스템 anaconda python3.11 자동탐지 + run.sh로 환경 고정(재현성↑)</td>
+      </tr>
+      <tr>
+        <td><span class="pill b">정확도</span> 정규식 오탐</td>
+        <td>‘적용 기간(가점기준)’ 표의 “최근 3년 이내”를 사업기간으로 오인식</td>
+        <td>헤더를 <code>연구개발기간|사업기간|총 기간</code>으로 한정해 오탐 제거</td>
+      </tr>
+      <tr>
+        <td><span class="pill b">초기 판단</span> 명세 위치</td>
+        <td>GitHub URL이 404라 명세가 없는 줄 알고 빈 내용으로 덮어쓸 뻔함</td>
+        <td>로컬에서 실제 18KB 명세 발견 → “파일 미읽음” 가드가 원본 보존</td>
+      </tr>
+      <tr>
+        <td><span class="pill g">협업</span> git 충돌</td>
+        <td>push가 non-fast-forward 거부, 원격이 앞서 있음</td>
+        <td>원격 겹침 파일이 빈 템플릿임을 검증 후 <code>merge -X ours</code>로 무손실 병합</td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- 장점 -->
+  <section class="card">
+    <h2><span class="n">5</span> 우리의 장점</h2>
+    <div class="str">
+      <div><b><span class="em">결정적·재현 가능</span></b><span>파서+정규식 기반이라 같은 입력이면 항상 같은 결과. run.sh·requirements·README로 누구나 동일하게 재현합니다.</span></div>
+      <div><b><span class="em">100% 로컬·무료 동작</span></b><span>opendataloader-pdf와 Ollama로 API 키 없이도 풀 파이프라인이 돌아갑니다. 키를 넣으면 코드 수정 없이 Claude LIVE로 전환.</span></div>
+      <div><b><span class="em">근거 추적 + 할루시네이션 방지</span></b><span>전 항목 evidence_id 자동 연결, 근거 없으면 미생성. 배점 합계(100=100) 자동 검산.</span></div>
+      <div><b><span class="em">계약 기반 확장성</span></b><span>같은 DB·JSON 계약 위에 여러 화면을 올릴 수 있는 구조. 의사결정 플랫폼을 완성했고, 표출형 대시보드 연동은 다음 단계의 명확한 길을 확보했습니다.</span></div>
+      <div><b><span class="em">백엔드 선택 자유</span></b><span>AGENT2_BACKEND=hybrid / claude / ollama / offline 한 줄로 교체. 환경·예산에 맞춰 고릅니다.</span></div>
+      <div><b><span class="em">역할 분리 의사결정</span></b><span>부서장·행정부·부문장 판단을 분리해, 결재권자가 리스크 원인을 빠르게 파악합니다.</span></div>
+    </div>
+  </section>
+
+  <!-- 기술스택 -->
+  <section class="card">
+    <h2><span class="n">6</span> 기술 스택 · 재사용 자산</h2>
+    <div class="grid2">
+      <div>
+        <h3>기술 스택</h3>
+        <div class="chips">
+          <span>opendataloader-pdf</span><span>Python 3.11</span><span>SQLite</span>
+          <span>Claude API (tool use)</span><span>Ollama (qwen2.5)</span>
+          <span>React 18 · TypeScript</span><span>Vite · Tailwind</span><span>Cloudflare Pages</span>
+        </div>
+      </div>
+      <div>
+        <h3>재사용 산출물 (다른 문서에도 그대로 적용)</h3>
+        <div class="chips">
+          <span>agent1_parse.py · run.sh</span><span>agent2_extract.py (4백엔드)</span>
+          <span>schema.sql · load_to_db.py · query.py</span><span>입력 계약 mock</span>
+          <span>재사용 프롬프트셋</span><span>cord 디자인 토큰</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <p class="foot">예보사업부 AI·AX 해커톤 · 팀 cool-cjm · 마경림(mkr) — PDF→파싱→분석→DB→대시보드 전 파이프라인 + 수주검토 의사결정 플랫폼</p>
+
+</main>
+</body>
+</html>

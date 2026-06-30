@@ -33,7 +33,7 @@ export function ScoreSegmented({ value, onChange, color, label, max = 5 }: Score
             style={
               selected
                 ? { background: color, borderColor: color, color: '#fff', boxShadow: `0 4px 12px ${color}40` }
-                : { background: '#fff', borderColor: '#dbe7f4', color: '#64748b' }
+                : { background: '#fff', borderColor: '#dde7ee', color: '#486984' }
             }
           >
             {n}

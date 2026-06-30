@@ -86,7 +86,7 @@ export function RadarChart({
     >
       {/* 격자 폴리곤 */}
       {rings.map((pts, i) => (
-        <polygon key={i} points={pts} fill="none" stroke="#dbe7f4" strokeWidth={1} />
+        <polygon key={i} points={pts} fill="none" stroke="#dde7ee" strokeWidth={1} />
       ))}
 
       {/* 축선 + 라벨 */}
@@ -95,7 +95,7 @@ export function RadarChart({
         const anchor = lp.x > CX + 1 ? 'start' : lp.x < CX - 1 ? 'end' : 'middle';
         return (
           <g key={i}>
-            <line x1={CX} y1={CY} x2={p.x} y2={p.y} stroke="#c7d6e7" strokeWidth={1} />
+            <line x1={CX} y1={CY} x2={p.x} y2={p.y} stroke="#c8d8e4" strokeWidth={1} />
             <text
               x={lp.x}
               y={lp.y}
@@ -103,7 +103,7 @@ export function RadarChart({
               dominantBaseline="middle"
               fontSize={12}
               fontWeight={700}
-              fill="#334155"
+              fill="#0b3658"
             >
               {axes[i]}
             </text>

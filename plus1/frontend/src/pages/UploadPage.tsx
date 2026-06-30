@@ -3,7 +3,8 @@ import { useApp } from '@/context/AppContext';
 import { Card, CardBody, CardHeader } from '@/components/ui/Card';
 import { Field, Input } from '@/components/ui/Field';
 import { Reveal } from '@/components/Reveal';
-import { IconUpload, IconUsers, IconFile, IconX, IconArrowRight } from '@/components/Icons';
+import { ApprovalLine } from '@/components/ApprovalLine';
+import { IconUpload, IconUsers, IconFile, IconX } from '@/components/Icons';
 import { formatKRW } from '@/lib/utils';
 
 interface DropzoneProps {
@@ -57,15 +58,17 @@ function Dropzone({ label, accept, file, onFile, hint }: DropzoneProps) {
             setDragging(false);
             pick(e.dataTransfer.files?.[0]);
           }}
-          className={`flex w-full flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed p-7 text-center transition-colors focus-ring ${
+          className={`flex w-full flex-col items-center justify-center gap-4 rounded-2xl border-2 border-dashed py-14 text-center transition-colors focus-ring ${
             dragging ? 'border-blue bg-blue/5' : 'border-line bg-canvas/50 hover:border-blue/40'
           }`}
         >
-          <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue/10 text-blue">
-            <IconUpload width={22} height={22} />
+          <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-blue/10 text-blue">
+            <IconUpload width={30} height={30} />
           </span>
-          <span className="text-base font-semibold text-ink">클릭 또는 드래그하여 업로드</span>
-          <span className="text-xs text-muted">{hint}</span>
+          <span className="space-y-1">
+            <span className="block text-lg font-bold text-ink">클릭 또는 드래그하여 업로드</span>
+            <span className="block text-sm text-muted">{hint}</span>
+          </span>
         </button>
       )}
       <input
@@ -80,7 +83,38 @@ function Dropzone({ label, accept, file, onFile, hint }: DropzoneProps) {
 }
 
 export function UploadPage() {
-  const { rfpFile, riskFile, setRfpFile, setRiskFile, reviewers, setReviewers } = useApp();
+  const { rfpFile, setRfpFile, reviewers, setReviewers } = useApp();
+
+  const approvalNodes = [
+    {
+      step: '1차',
+      label: '부서장',
+      name: reviewers.dept,
+      initial: reviewers.dept.charAt(0),
+      status: 'active' as const,
+    },
+    {
+      step: '2차',
+      label: '행정부',
+      name: reviewers.admin,
+      initial: reviewers.admin.charAt(0),
+      status: 'pending' as const,
+    },
+    {
+      step: '3차',
+      label: '부문장',
+      name: reviewers.exec,
+      initial: reviewers.exec.charAt(0),
+      status: 'pending' as const,
+    },
+    {
+      step: '최종',
+      label: '대표',
+      name: '대표이사',
+      initial: '대',
+      status: 'pending' as const,
+    },
+  ];
 
   return (
     <div className="space-y-6">
@@ -88,23 +122,16 @@ export function UploadPage() {
         <Card>
           <CardHeader
             icon={<IconUpload />}
-            title="공고문 · 내부 위험요소 업로드"
-            desc="공고문/RFP와 내부 위험요소 한글파일을 업로드합니다. (데모: 업로드는 mock 처리)"
+            title="공고문 / RFP 업로드"
+            desc="공고문 또는 RFP 파일을 업로드합니다. (데모: 업로드는 mock 처리)"
           />
-          <CardBody className="grid grid-cols-1 gap-5 md:grid-cols-2">
+          <CardBody>
             <Dropzone
               label="공고문 / RFP"
               accept=".pdf,.hwp,.hwpx,.docx"
               file={rfpFile}
               onFile={setRfpFile}
-              hint="PDF · HWP · DOCX 지원"
-            />
-            <Dropzone
-              label="내부 위험요소 (한글파일)"
-              accept=".hwp,.hwpx,.docx,.pdf"
-              file={riskFile}
-              onFile={setRiskFile}
-              hint="HWP · HWPX 지원"
+              hint="PDF · HWP · HWPX · DOCX 지원 — 드래그 또는 클릭하여 선택"
             />
           </CardBody>
         </Card>
@@ -118,6 +145,9 @@ export function UploadPage() {
             desc="역할별 평가자와 결재 검토자를 지정합니다. 기본값은 v9 표준 라인업입니다."
           />
           <CardBody className="space-y-6">
+            {/* 결재 라인 시각화 */}
+            <ApprovalLine nodes={approvalNodes} />
+
             <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
               <Field label="부서장 / 최초 평가자">
                 <Input
@@ -137,21 +167,6 @@ export function UploadPage() {
                   onChange={(e) => setReviewers({ ...reviewers, exec: e.target.value })}
                 />
               </Field>
-            </div>
-
-            {/* 업무 흐름 안내 */}
-            <div className="rounded-2xl border border-blue/20 bg-blue/5 p-5">
-              <p className="mb-3 text-sm font-bold text-blue">업무 흐름</p>
-              <div className="flex flex-wrap items-center gap-2 text-sm font-semibold text-navy">
-                {['부서장 평가', '행정부 평가 요청', '부문장 평가 요청', '자동 결과보고서 생성', '결재 상신'].map(
-                  (step, i, arr) => (
-                    <span key={step} className="flex items-center gap-2">
-                      <span className="rounded-xl bg-white px-3 py-1.5 ring-1 ring-line">{step}</span>
-                      {i < arr.length - 1 && <IconArrowRight width={16} height={16} className="text-muted" />}
-                    </span>
-                  ),
-                )}
-              </div>
             </div>
           </CardBody>
         </Card>

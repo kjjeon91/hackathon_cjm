@@ -10,7 +10,7 @@ export function Table({ children, className }: { children: ReactNode; className?
 }
 
 export function THead({ children }: { children: ReactNode }) {
-  return <thead className="bg-[#eef7ff]">{children}</thead>;
+  return <thead className="bg-[#e6f1fa]">{children}</thead>;
 }
 
 export function TBody({ children }: { children: ReactNode }) {
@@ -60,7 +60,7 @@ export function Td({
 /** 라벨/값 2열 정보 행 (사업개요용) — th는 옅은 파랑 배경 */
 export function KeyTh({ children }: { children: ReactNode }) {
   return (
-    <th className="w-[18%] whitespace-nowrap border-r border-line bg-[#eef7ff] px-3.5 py-3 text-left text-sm font-bold text-navy">
+    <th className="w-[18%] whitespace-nowrap border-r border-line bg-[#e6f1fa] px-3.5 py-3 text-left text-sm font-bold text-navy">
       {children}
     </th>
   );

@@ -26,11 +26,11 @@ export function Stepper({
               <button
                 onClick={() => onSelect(i)}
                 aria-current={state === 'active' ? 'step' : undefined}
-                className="group flex min-w-0 flex-1 items-center gap-2.5 rounded-2xl px-2.5 py-2 transition-colors hover:bg-white focus-ring"
+                className="group flex min-w-0 flex-1 items-center gap-2.5 rounded-2xl px-2.5 py-2 transition-all duration-300 ease-ocean hover:bg-white hover:shadow-soft focus-ring"
               >
                 <span
                   className={cn(
-                    'flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-bold transition-all',
+                    'flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-bold transition-all duration-300 ease-ocean group-hover:scale-105',
                     state === 'active' && 'bg-gradient-to-br from-navy to-blue text-white shadow-header',
                     state === 'done' && 'bg-green/15 text-green',
                     state === 'todo' && 'bg-white text-muted ring-1 ring-line',

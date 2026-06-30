@@ -153,3 +153,37 @@
 ## 마무리 요약 (1~2줄)
 - 가장 효과적이었던 에이전트 활용법: **명세를 "협업 계약"으로 다루기** — 애매한 부분을 문서에 명시(추출항목·미해결이슈)하고, 입력을 mock 계약으로 고정해 agent1 미완성 중에도 agent2를 단독 검증.
 - 다른 팀이 그대로 따라 하려면 필요한 것: 입력 계약 mock 1개 + 고정 JSON 스키마(tool use) + 오프라인/라이브 겸용 추출 스크립트(`src/agent2/`) + 재사용 프롬프트셋(`submit/assets/`). 그대로 복제하면 다른 문서 유형에도 적용 가능.
+
+---
+### [#13] cord.com 스타일로 대시보드 디자인 리테마
+- 작성자(팀원): 마경림 (mkr)
+- 목표: plus1/frontend(RFP 의사결정 대시보드)를 `DESIGN_edit.md`(cord.com — "deep ocean signal station" 스타일 가이드) 기준으로 재디자인
+- 에이전트에게 시킨 것(실제 프롬프트 핵심 인용):
+  > "DESIGN_edit.md 이걸로 'plus1/frontend' 해당 사이트 디자인 수정해줘"
+- 사용한 기법(있으면): (c 재사용산출물 — DESIGN_edit.md 디자인 토큰을 Tailwind 토큰으로 매핑)
+- 결과:
+  - **디자인 토큰 리매핑**(tailwind.config.js): 기존 토큰 값을 cord 팔레트로 교체해 전 컴포넌트 일괄 적용 — navy `#061627→#0b3658`(Midnight Harbor), blue `#0b4ea2→#4e9ad9`(Signal Blue), line `#dbe7f4→#dde7ee`(Sea Fog), muted→`#486984`(Slate Channel), canvas→`#f1f7fc`(옅은 청백 워시). 신규 토큰 추가: signal/slate/steel/fog/ice/mist/teal.
+  - **그림자 블루틴트화**: `rgba(6,22,39)` → `rgba(11,54,88)` (cord 규칙: 회색 그림자 금지). card/soft/float/header 갱신.
+  - **형태**: 카드 라운드 20px, 입력/버튼 24px, 버튼 pill(rounded-full)화. 헤더 그라데이션이 navy→blue(#0b3658→#4e9ad9)로 cord "deep navy command deck + bright blue flare" 콘셉트와 일치.
+  - **타이포**: Figtree(Google Fonts) 추가 → 라틴은 Figtree, 한글은 Pretendard 폴백.
+  - **세부 리테마**: Button/Badge(ice tint), Table 헤더·키셀(#e6f1fa), RadarChart 그리드·축·라벨(sea fog/navy), ScoreSegmented 슬라이더.
+  - **의사결정 시맨틱 색(green/amber/red) 유지**: 참여/조건부/보류 의미색은 cord의 teal status처럼 도메인 상태색으로 보존(가이드의 정당한 예외).
+  - 검증: `tsc -b` 통과, `vite build` 성공(exit 0, 59 modules, 771ms).
+- 막힘 → 해결(있었다면): cord signal blue(#4e9ad9)는 본문/헤딩 대비가 낮음 → 헤딩·본문은 navy(#0b3658)로 두고 signal blue는 버튼·active·로고 등 인터랙티브 강조에만 한정(가이드 원칙 준수)하여 가독성과 브랜드 일관성 동시 확보.
+
+---
+### [#14] cord.com 동적 인터랙션·모션 적용
+- 작성자(팀원): 마경림 (mkr)
+- 목표: cord.com 홈페이지의 동적 기능(마이크로 인터랙션·모션)을 대시보드에 이식
+- 에이전트에게 시킨 것(실제 프롬프트 핵심 인용):
+  > "https://cord.com/ 해당 홈페이지를 참고해서 동적기능들을 수정해줘"
+- 사용한 기법(있으면): (b 도구연동 — WebFetch로 cord.com 확인 시도 / c 재사용 유틸 클래스 .hover-lift·.input-glow)
+- 결과:
+  - **cord 시그니처 easing** `cubic-bezier(.16,1,.3,1)`를 tailwind `ease-ocean`으로 토큰화 → 전 인터랙션에 일관 적용.
+  - **카드 elevation 언어**: 모든 Card가 hover 시 그림자 상승(shadow-soft, ease-ocean), `interactive` prop 추가 시 -translate-y-1 + shadow-lift로 떠오름(클릭형 카드용).
+  - **버튼 hover-lift**: primary/secondary가 hover 시 살짝 떠오르고 그림자 강화(shadow-lift), active 시 복귀 — cord 버튼 인터랙션.
+  - **입력 focus 글로우**: `.input-glow`로 focus 시 signal-blue 4px 글로우(shadow-focus) — cord 검색 input focus 거동 재현.
+  - **탭/스텝퍼 모션**: segmented 전환과 스텝 노드(hover scale-105)를 ease-ocean 300ms로 부드럽게, hover 표면 ice tint.
+  - **접근성**: `prefers-reduced-motion` 미디어쿼리로 모션 민감 사용자에겐 애니메이션 자동 비활성.
+  - 검증: `tsc -b` 통과, `vite build` 성공(exit 0, 59 modules, 788ms).
+- 막힘 → 해결(있었다면): cord.com이 클라이언트 렌더라 WebFetch로 인터랙션 추출 불가 → DESIGN_edit.md에 문서화된 cord 컴포넌트/모션 스펙(toggle·card elevation·input focus shadow·reveal 곡선)을 근거로 구현.

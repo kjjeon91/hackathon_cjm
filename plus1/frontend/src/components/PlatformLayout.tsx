@@ -11,8 +11,7 @@ export const STEPS: (Step & { path: string })[] = [
   { key: 'dept', label: '부서장 판단', short: '부서장', path: '/dept' },
   { key: 'admin', label: '행정부 판단', short: '행정부', path: '/admin' },
   { key: 'exec', label: '부문장 판단', short: '부문장', path: '/exec' },
-  { key: 'report-setup', label: '결과보고서 생성 설정', short: '보고서 설정', path: '/report-setup' },
-  { key: 'summary', label: '종합평가', short: '종합평가', path: '/summary' },
+  { key: 'summary', label: '결과보고서 생성', short: '결과보고서', path: '/summary' },
 ];
 
 export function PlatformLayout({ children }: { children: ReactNode }) {
@@ -50,15 +49,6 @@ export function PlatformLayout({ children }: { children: ReactNode }) {
               </h1>
             </div>
           </div>
-          <Button
-            variant="secondary"
-            size="sm"
-            className="bg-white/15 text-white hover:bg-white/25"
-            onClick={() => navigate('/report')}
-          >
-            결과보고서 미리보기
-            <IconArrowRight width={16} height={16} />
-          </Button>
         </div>
       </header>
 

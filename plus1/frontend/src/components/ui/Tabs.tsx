@@ -31,10 +31,10 @@ export function Tabs({
             aria-selected={selected}
             onClick={() => onChange(it.key)}
             className={cn(
-              'rounded-xl px-4 py-2 text-sm font-semibold transition-all focus-ring',
+              'rounded-xl px-4 py-2 text-sm font-semibold transition-all duration-300 ease-ocean focus-ring',
               selected
                 ? 'bg-gradient-to-br from-navy to-blue text-white shadow-sm'
-                : 'text-muted hover:text-ink',
+                : 'text-muted hover:bg-ice hover:text-navy',
             )}
           >
             {it.label}
