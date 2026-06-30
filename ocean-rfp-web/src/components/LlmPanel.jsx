@@ -35,7 +35,7 @@ export default function LlmPanel({ count = 4 }) {
   return (
     <aside className="glass llm">
       <div className="llmhead">
-        <h2><span className="dot" />LLM 어시스턴트</h2>
+        <h2><span className="dot" />AI 어시스턴트</h2>
         <p>{count}개 사업 목록·메타정보 기준으로 답변합니다.</p>
       </div>
       <div className="lb">

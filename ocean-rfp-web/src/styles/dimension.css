@@ -105,7 +105,7 @@ h1 em { font-style: normal; background: linear-gradient(110deg, var(--cy2), var(
 .kpi.hi { background: linear-gradient(135deg, rgba(111, 123, 255, 0.22), rgba(61, 220, 203, 0.12)); border-color: rgba(130, 150, 255, 0.3); }
 
 /* --- main layout: 상단 KPI 4칸 그리드와 동일 정렬 (목록 3칸 + LLM 1칸) --- */
-.layout { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; align-items: start; }
+.layout { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; align-items: stretch; }
 .layout > .glass:not(.llm) { grid-column: span 3; min-width: 0; }
 .layout > .llm { grid-column: span 1; }
 
