@@ -79,15 +79,17 @@ button { font-family: inherit; cursor: pointer; }
 /* clock (refined, light) */
 .clock { text-align: right; }
 .clock-time { display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
-.clock-live { width: 7px; height: 7px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 4px rgba(66, 179, 177, 0.15); animation: clockpulse 2s ease-in-out infinite; }
+.clock-live { width: 8px; height: 8px; border-radius: 50%; background: var(--blue); animation: clockpulse 1.6s ease-in-out infinite; }
 .hm { font-size: 24px; font-weight: 800; color: var(--navy); letter-spacing: 0.02em; line-height: 1; font-variant-numeric: tabular-nums; }
 .hm .colon { animation: blink 1s steps(1, end) infinite; color: var(--blue); padding: 0 1px; }
-.ss { font-size: 13px; font-weight: 700; color: var(--blue); font-variant-numeric: tabular-nums; align-self: flex-end; padding-bottom: 2px; }
+.ss { font-size: 13px; font-weight: 700; color: var(--blue); font-variant-numeric: tabular-nums; align-self: flex-end; padding-bottom: 2px; display: inline-block; animation: tick 0.4s cubic-bezier(0.22, 0.61, 0.36, 1); }
 .clock-meta { font-size: 10.5px; color: var(--steel); margin-top: 4px; letter-spacing: 0.04em; }
-.online { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 600; color: var(--teal); }
-.online::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 3px rgba(66, 179, 177, 0.18); }
-@keyframes clockpulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-@keyframes blink { 50% { opacity: 0.25; } }
+.online { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 700; color: var(--teal); }
+.online::before { content: ''; width: 9px; height: 9px; border-radius: 50%; background: #22c55e; animation: onlineblink 1.4s ease-in-out infinite; }
+@keyframes clockpulse { 0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(78, 154, 217, 0.5); } 50% { opacity: 0.55; box-shadow: 0 0 0 5px rgba(78, 154, 217, 0); } }
+@keyframes blink { 50% { opacity: 0.2; } }
+@keyframes tick { from { transform: translateY(-3px); opacity: 0.25; } to { transform: none; opacity: 1; } }
+@keyframes onlineblink { 0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.55); } 50% { opacity: 0.45; box-shadow: 0 0 0 5px rgba(34, 197, 94, 0); } }
 
 /* ---------- layout shells ---------- */
 main { padding: 28px 32px 64px; max-width: 1200px; margin: 0 auto; }

@@ -29,7 +29,7 @@ export default function StatusBar({ now }) {
             <div className="clock-time">
               <span className="clock-live" />
               <span className="hm mono">{hh}<span className="colon">:</span>{mm}</span>
-              <span className="ss mono">{ss}</span>
+              <span className="ss mono" key={ss}>{ss}</span>
             </div>
             <div className="clock-meta mono">{ampm} · {date} ({wd})</div>
           </div>
