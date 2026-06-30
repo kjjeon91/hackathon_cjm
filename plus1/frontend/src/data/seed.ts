@@ -8,13 +8,21 @@
 export type Judgement = '참여' | '조건부' | '보류';
 export type RiskLevel = 'green' | 'amber' | 'red';
 
+/** 역할별 평가 축 상세 (plus1.html factorDefs — 긴 제목 + 설명) */
+export interface AxisDef {
+  key: string; // 짧은 라벨 (레이더 차트 축)
+  title: string; // 긴 제목 (평가항목명)
+  desc: string; // 설명문
+}
+
 /** 역할별 평가 축 정의 (각 6축, 0~5점) */
 export interface RoleConfig {
   key: 'dept' | 'admin' | 'exec';
   label: string;
   reviewer: string;
   color: string; // 레이더 폴리곤 색
-  axes: string[]; // 6축 라벨
+  axes: string[]; // 6축 짧은 라벨 (레이더 차트용)
+  factors: AxisDef[]; // 6축 상세 (긴 제목 + 설명)
 }
 
 export const ROLE_CONFIG: Record<RoleConfig['key'], RoleConfig> = {
@@ -24,6 +32,38 @@ export const ROLE_CONFIG: Record<RoleConfig['key'], RoleConfig> = {
     reviewer: '최흥배 부서장',
     color: '#2563eb',
     axes: ['기술', '인력', '데이터', '제안', '통제', '전략'],
+    factors: [
+      {
+        key: '기술',
+        title: '핵심기술 적합도',
+        desc: '해양영상 AI, 해양데이터, 위성·예측정보, 플랫폼 기술 중 우리 부서 강점과 직접 맞는 정도',
+      },
+      {
+        key: '인력',
+        title: '수행 인력 확보 가능성',
+        desc: '사업책임자와 실무 인력을 실제 투입할 수 있는지',
+      },
+      {
+        key: '데이터',
+        title: '데이터·실증 확보 가능성',
+        desc: '영상·센서 데이터, 라벨링, 현장 실증, 기관 연계자료를 확보할 수 있는지',
+      },
+      {
+        key: '제안',
+        title: '제안 차별화 가능성',
+        desc: '평가위원에게 설득 가능한 차별화 기술, 실적, 데이터, 시나리오를 제시할 수 있는지',
+      },
+      {
+        key: '통제',
+        title: '수행범위 통제 가능성',
+        desc: '컨소시엄 내 당사 역할, 산출물 책임, 일정·품질을 통제할 수 있는지',
+      },
+      {
+        key: '전략',
+        title: '부서 전략 적합성',
+        desc: '위성·AI·해양예측·AX 플랫폼 등 부서 중장기 방향과 맞는지',
+      },
+    ],
   },
   admin: {
     key: 'admin',
@@ -31,6 +71,38 @@ export const ROLE_CONFIG: Record<RoleConfig['key'], RoleConfig> = {
     reviewer: '오주혜 선임',
     color: '#d97706',
     axes: ['예산', '계약', '제출', '기관', '정산', '관리'],
+    factors: [
+      {
+        key: '예산',
+        title: '예산·수익 구조 안정성',
+        desc: '전체 예산, 사업부서 예산, 순익, 수익성, 원가추정 불확실성을 고려한 안정성',
+      },
+      {
+        key: '계약',
+        title: '계약·기술료 조건 수용성',
+        desc: '기술료, 성과물 소유권, 기업참여, 연구비 부담 조건을 회사가 수용할 수 있는지',
+      },
+      {
+        key: '제출',
+        title: '행정 제출·IRIS 부담 적정성',
+        desc: '제안서, 참여의사확인서, 증빙, 재무제표, IRIS 입력 등 제출 부담의 적정성',
+      },
+      {
+        key: '기관',
+        title: '참여기관 신용·재정 안정성',
+        desc: '공동기관과 위탁기관의 신용등급, 재무상태, 지속 수행 가능성',
+      },
+      {
+        key: '정산',
+        title: '정산·감사 대응 안정성',
+        desc: '연구비 집행, 증빙, 감사, 기술료 산정, 청년인력 등 사후관리 안정성',
+      },
+      {
+        key: '관리',
+        title: '컨소시엄 계약관리 가능성',
+        desc: '기관 수와 역할분담을 고려한 협약·비용정산·자료제공 의무 관리 가능성',
+      },
+    ],
   },
   exec: {
     key: 'exec',
@@ -38,8 +110,77 @@ export const ROLE_CONFIG: Record<RoleConfig['key'], RoleConfig> = {
     reviewer: '송용식 부사장',
     color: '#7c3aed',
     axes: ['수주', '수익', '전략', '우선', '수용', '파급'],
+    factors: [
+      {
+        key: '수주',
+        title: '수주 가능성',
+        desc: '경쟁구도, 컨소시엄 경쟁력, 평가항목 대응력을 고려한 실제 수주 가능성',
+      },
+      {
+        key: '수익',
+        title: '사업성·수익성',
+        desc: '매출, 순익, 수익성, 후속사업 가능성을 고려한 사업 가치',
+      },
+      {
+        key: '전략',
+        title: '전략적 중요도',
+        desc: '해양 AI, AX 플랫폼, 대형 R&D 레퍼런스 확보 측면의 중요도',
+      },
+      {
+        key: '우선',
+        title: '조직 자원투입 우선순위',
+        desc: '다른 사업과 비교해 핵심 인력과 조직 자원을 투입할 우선순위',
+      },
+      {
+        key: '수용',
+        title: '위험수용성',
+        desc: '기술·데이터·기관·계약 리스크가 있어도 회사가 감내 가능한 수준인지',
+      },
+      {
+        key: '파급',
+        title: '대외 파급효과',
+        desc: '정책연계, 후속과제, 브랜드, 레퍼런스 창출 효과',
+      },
+    ],
   },
 };
+
+/** 참여기관 실명 (plus1.html institutions) */
+export const INSTITUTIONS = [
+  '한국조선해양기자재연구원',
+  '한국해양과학기술원',
+  '㈜지오시스템리서치',
+  '㈜아이렘 기술개발',
+  '부산대학교 산학협력단',
+  '㈜산엔지니어링',
+  '㈜씨넷',
+];
+
+/** 참여기관 위험평가 (plus1.html buildInstitutions) */
+export interface InstitutionRisk {
+  name: string;
+  credit: number; // 신용·재정 안정성
+  role: number; // 역할 명확성
+  manage: number; // 계약관리 난이도
+}
+
+/**
+ * 참여기관 위험평가 점수 산정 (plus1.html buildInstitutions 로직 이식)
+ * - credit: idx 0/1/4 → 4, 그 외 3
+ * - role: idx 2 → 5, 그 외 3
+ * - manage: count>=8 → 2, count>=6 → 3, 그 외 4
+ */
+export function buildInstitutions(count = INSTITUTIONS.length): InstitutionRisk[] {
+  const list: InstitutionRisk[] = [];
+  for (let idx = 0; idx < count; idx++) {
+    const name = INSTITUTIONS[idx] ?? `참여기관 ${idx + 1}`;
+    const credit = idx === 0 || idx === 1 || idx === 4 ? 4 : 3;
+    const role = idx === 2 ? 5 : 3;
+    const manage = count >= 8 ? 2 : count >= 6 ? 3 : 4;
+    list.push({ name, credit, role, manage });
+  }
+  return list;
+}
 
 /** 종합 평가축 (plus1.html 종합 레이더) */
 export const SUMMARY_AXES = ['기술수행', '행정안정', '전략가치', '수익성', '기관위험', '위험수용'];
@@ -85,6 +226,9 @@ export interface ProjectOverview {
   partnerCount: number;
   manager: string; // 사업책임자
   department: string;
+  selectedTaskCount: string; // 선정과제수
+  taskNature: string; // 과제성격
+  securityClass: string; // 보안과제
 }
 
 export const PROJECT_OVERVIEW: ProjectOverview = {
@@ -96,6 +240,9 @@ export const PROJECT_OVERVIEW: ProjectOverview = {
   partnerCount: 7,
   manager: '박영민',
   department: '예보사업부',
+  selectedTaskCount: '1개',
+  taskNature: '연구개발',
+  securityClass: '일반과제',
 };
 
 /** 주요 사업내용 (plus1.html 4.주요 사업내용) */

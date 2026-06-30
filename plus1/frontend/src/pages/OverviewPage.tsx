@@ -49,6 +49,18 @@ export function OverviewPage() {
                     <b className="text-blue">{formatKRW(departmentBudget)}원</b>
                   </Td>
                 </Tr>
+                <Tr>
+                  <KeyTh>선정과제수</KeyTh>
+                  <Td>{o.selectedTaskCount}</Td>
+                  <KeyTh>과제성격</KeyTh>
+                  <Td>{o.taskNature}</Td>
+                </Tr>
+                <Tr>
+                  <KeyTh>보안과제</KeyTh>
+                  <Td>{o.securityClass}</Td>
+                  <KeyTh>{''}</KeyTh>
+                  <Td>{''}</Td>
+                </Tr>
               </TBody>
             </Table>
           </CardBody>

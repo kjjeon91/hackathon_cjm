@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>RFP Decision Intelligence v9 - 결재자지정/보고서차트</title>
+<style>
+:root{
+  --navy:#061627;--blue:#0b4ea2;--blue2:#2563eb;--aqua:#23c7bb;--bg:#f4f8fc;
+  --card:#fff;--line:#dbe7f4;--text:#0f172a;--muted:#64748b;
+  --green:#16a34a;--amber:#f59e0b;--red:#dc2626;--purple:#7c3aed;
+  --shadow:0 16px 42px rgba(6,22,39,.10)
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Pretendard,"Noto Sans KR",system-ui,sans-serif;background:linear-gradient(180deg,#f8fcff,#eef7ff);color:var(--text)}
+header{height:76px;background:linear-gradient(90deg,#03111f,#061627,#0b3d68);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 30px;position:sticky;top:0;z-index:10;box-shadow:0 10px 28px rgba(3,17,31,.24)}
+.brand{display:flex;align-items:center;gap:12px;font-weight:950;font-size:23px;letter-spacing:-.04em}.logo{width:44px;height:44px;border-radius:15px;background:linear-gradient(135deg,var(--aqua),var(--blue2));display:grid;place-items:center}.pills{display:flex;gap:10px;flex-wrap:wrap}.pill{border:1px solid rgba(255,255,255,.22);border-radius:999px;background:rgba(255,255,255,.09);padding:9px 14px;font-size:13px;color:#dceeff}
+main{max-width:1560px;margin:auto;padding:26px}.layout{display:grid;grid-template-columns:282px minmax(0,1fr);gap:20px}.sidebar{position:sticky;top:96px;align-self:start;background:#fff;border:1px solid var(--line);border-radius:26px;box-shadow:var(--shadow);padding:16px}.stitle{font-size:14px;color:var(--blue);font-weight:950;margin:4px 0 12px}.step{display:flex;gap:12px;padding:12px;border-radius:16px;cursor:pointer;align-items:flex-start;border:1px solid transparent}.step:hover{background:#f6fbff}.step.active{background:#eef7ff;border-color:#c8def3}.num{width:28px;height:28px;border-radius:10px;background:var(--blue);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:950;flex:0 0 auto}.step h4{margin:2px 0 4px;font-size:14px}.step p{margin:0;color:var(--muted);font-size:12px;line-height:1.45}.screen{display:none}.screen.on{display:block}
+.hero{border-radius:30px;padding:30px;background:radial-gradient(circle at 86% 18%,rgba(34,199,186,.28),transparent 24%),linear-gradient(135deg,#061627,#0a3a62 55%,#0b4ea2);color:#fff;box-shadow:var(--shadow);margin-bottom:18px}.eyebrow{font-size:12px;font-weight:950;letter-spacing:.11em;text-transform:uppercase;color:#9fe7ff}h1{font-size:34px;margin:8px 0 10px;letter-spacing:-.05em}.hero p{margin:0;color:#d7ebff;line-height:1.65}.card{background:#fff;border:1px solid var(--line);border-radius:26px;box-shadow:var(--shadow);padding:24px;margin-bottom:18px}.card h2{margin:0 0 14px;font-size:22px;letter-spacing:-.03em}.card h3{margin:0 0 12px;font-size:18px}.muted{color:var(--muted);line-height:1.65}.meta-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.meta{border:1px solid #d8e6f5;background:#fbfdff;border-radius:18px;padding:15px}.meta b{display:block;font-size:12px;color:var(--blue);margin-bottom:7px}.meta span{font-weight:850}.columns{display:grid;grid-template-columns:1fr 1fr;gap:18px}.page-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}
+.upload-start-card{display:grid;grid-template-columns:1.05fr .95fr;gap:18px;background:#fff;border:1px solid var(--line);border-radius:30px;box-shadow:var(--shadow);padding:24px;margin-bottom:18px}.upload-left{border:1px solid #cfe0f2;background:linear-gradient(180deg,#f8fcff,#fff);border-radius:26px;padding:26px}.upload-left h2{margin:0 0 10px;font-size:26px;letter-spacing:-.04em}.upload-left p{color:var(--muted);line-height:1.65;margin:0 0 18px}.upload-icon{width:64px;height:64px;border-radius:22px;background:linear-gradient(135deg,#e0f7ff,#eef6ff);border:1px solid #c8e4f4;display:grid;place-items:center;font-size:34px;margin-bottom:14px}.upload-drop{border:2px dashed #b7d7f4;background:#f8fcff;border-radius:24px;padding:30px;text-align:center;color:#0f172a;margin:16px 0}.upload-drop strong{display:block;font-size:18px;margin-bottom:8px}.upload-drop span{display:block;font-size:13px;color:var(--muted)}.upload-right{border:1px solid #dbe7f4;background:#fff;border-radius:26px;padding:24px}.upload-right h3{margin:0 0 16px;font-size:20px}.auto-list{display:grid;gap:12px}.auto-list div{border:1px solid #dce8f5;background:#fbfdff;border-radius:18px;padding:15px}.auto-list b{display:block;color:var(--blue);font-size:14px;margin-bottom:6px}.auto-list span{display:block;color:#475569;font-size:13px;line-height:1.5}.progress-line{height:12px;background:#e6eef7;border-radius:999px;overflow:hidden;margin:14px 0 16px}.progress-line span{display:block;width:0%;height:100%;background:linear-gradient(90deg,var(--blue),var(--aqua));border-radius:999px;transition:width .4s ease}.progress-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.progress-steps div{border:1px solid #dce8f5;background:#fff;border-radius:14px;padding:11px;text-align:center;font-size:13px;color:var(--muted);font-weight:850}.progress-steps div.done{background:#eaf7ff;color:#0b4ea2;border-color:#bfdbfe}
+.factor{border:1px solid var(--line);border-radius:22px;padding:16px;background:#fff;margin-bottom:12px}.factor-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;margin-bottom:10px}.factor-title{font-size:17px;font-weight:900;color:#0b4ea2}.help{font-size:12px;color:var(--muted);line-height:1.45}.score-row{display:grid;grid-template-columns:1fr 120px;gap:12px;align-items:center}input[type=range]{width:100%}.score-box{border:1px solid #dce6f3;background:#fbfdff;border-radius:16px;text-align:center;padding:12px 8px}.score-box b{display:block;font-size:26px;color:#0f172a}.score-box span{font-size:12px;color:var(--muted)}
+.form-row{display:grid;grid-template-columns:170px 1fr;gap:12px;align-items:center;margin-bottom:12px}.form-row label{font-size:13px;font-weight:900;color:#334155}.field{height:42px;border:1px solid #d3e3f3;border-radius:14px;padding:0 12px;font:inherit;background:#fbfdff}.textarea{min-height:90px;border:1px solid #d3e3f3;border-radius:14px;padding:12px;font:inherit;background:#fbfdff;width:100%;resize:vertical}
+.decision-box{border:1px solid #dce7f4;background:linear-gradient(180deg,#f8fcff,#fff);border-radius:22px;padding:18px}.taglist{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.tag{border-radius:999px;padding:7px 10px;font-size:12px;font-weight:900}.tag.good{background:#dcfce7;color:#166534}.tag.mid{background:#fef3c7;color:#92400e}.tag.bad{background:#fee2e2;color:#991b1b}.tag.info{background:#dbeafe;color:#1d4ed8}.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:#475569}.legend div{display:flex;gap:6px;align-items:center}.dot{width:10px;height:10px;border-radius:999px}.dot.red{background:#ef4444}.dot.amber{background:#f59e0b}.dot.green{background:#22c55e}
+.radar-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.radar-card{border:1px solid var(--line);border-radius:24px;background:#fff;box-shadow:var(--shadow);padding:16px}.radar-card h3{margin:0 0 6px;font-size:18px}.radar-sub{font-size:12px;color:var(--muted);margin-bottom:10px}svg{width:100%;height:auto}.axis-label{font-size:11px;fill:#334155;font-weight:700}.gridline{fill:none;stroke:#dbe7f4;stroke-width:1}.axis-line{stroke:#c7d6e7;stroke-width:1}.radar-fill-head{fill:rgba(37,99,235,.22);stroke:#2563eb;stroke-width:2}.radar-fill-admin{fill:rgba(245,158,11,.20);stroke:#d97706;stroke-width:2}.radar-fill-exec{fill:rgba(124,58,237,.18);stroke:#7c3aed;stroke-width:2}.radar-fill-total{fill:rgba(22,163,74,.18);stroke:#16a34a;stroke-width:2}
+.summary-table{width:100%;border-collapse:collapse}.summary-table th{background:#eef7ff;text-align:left;padding:12px;border-bottom:1px solid var(--line);font-size:13px}.summary-table td{padding:12px;border-bottom:1px solid #e8f1fb;font-size:13.5px;vertical-align:top}.summary-table tr:last-child td{border-bottom:none}.report{background:#fff;border:1px solid var(--line);border-radius:26px;box-shadow:var(--shadow);padding:28px;line-height:1.75}.report h2{border-bottom:2px solid #0b4ea2;padding-bottom:10px}.report h3{margin-top:22px;color:#0b4ea2}.report ul{padding-left:20px}.badge{display:inline-block;border-radius:999px;padding:8px 11px;font-weight:950;font-size:12px}.badge.green{background:#dcfce7;color:#166534}.badge.amber{background:#fef3c7;color:#92400e}.badge.red{background:#fee2e2;color:#991b1b}.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.btn{border:1px solid var(--blue);background:#fff;color:var(--blue);font-weight:950;border-radius:14px;padding:11px 16px;cursor:pointer}.btn.primary{background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;border-color:transparent}.btn.dark{background:#061627;color:#fff;border-color:#061627}.small{font-size:12px;color:var(--muted)}
+.matrix-note{border:1px solid #bfdbfe;background:#eff6ff;border-radius:18px;padding:14px;color:#1e3a5f;line-height:1.6;font-size:13.5px;margin-bottom:14px}.institution-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.institution{border:1px solid #dce8f5;background:#fbfdff;border-radius:18px;padding:14px}.institution b{display:block;color:#0b4ea2;margin-bottom:8px}.mini-row{display:grid;grid-template-columns:1fr 58px;gap:8px;align-items:center;margin:8px 0}.mini-row label{font-size:12px;color:#475569}.mini-row span{font-weight:950;text-align:center;border:1px solid #dce8f5;background:#fff;border-radius:10px;padding:5px}.combined{display:grid;grid-template-columns:1fr 1fr;gap:18px}.report-preview{border:1px solid #d6e7f7;background:#fbfdff;border-radius:20px;padding:20px;line-height:1.8;color:#1f2937}.approval-box{border:1px solid #dbe7f4;background:linear-gradient(180deg,#fff,#f8fcff);border-radius:22px;padding:16px}.approval-flow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.approval-step{border:1px solid #dce8f5;background:#fff;border-radius:16px;padding:12px;text-align:center}.approval-step b{display:block;color:#0b4ea2;margin-bottom:5px}.approval-step span{font-size:12px;color:#64748b}
+
+.total-summary-box{margin-top:14px;border:1px solid #dbe7f4;background:#fbfdff;border-radius:18px;padding:14px}
+.total-summary-box h4{margin:0 0 8px;color:#0b4ea2;font-size:15px}
+.total-summary-box p{margin:0 0 8px;color:#334155;line-height:1.6;font-size:13.5px}
+.total-summary-box ul{margin:8px 0 0;padding-left:18px;color:#475569;line-height:1.55;font-size:13px}
+
+
+.assign-card{background:linear-gradient(180deg,#fff,#f8fcff)}
+.assign-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.assign-box{border:1px solid #dbe7f4;background:#fff;border-radius:18px;padding:15px}
+.assign-box b{display:block;color:#0b4ea2;margin-bottom:9px}
+.assign-box span{display:block;color:#64748b;font-size:12px;line-height:1.4;margin-top:7px}
+.workflow-line{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+.workflow-line div{border:1px solid #dbe7f4;background:#fff;border-radius:16px;padding:12px;text-align:center}
+.workflow-line b{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:999px;background:#0b4ea2;color:#fff;margin-bottom:6px}
+.workflow-line span{display:block;font-size:12px;color:#475569;font-weight:800}
+
+@media(max-width:1200px){.layout{grid-template-columns:1fr}.sidebar{position:static}.meta-grid,.columns,.page-grid,.radar-wrap,.upload-start-card,.progress-steps,.institution-grid,.combined,.approval-flow,.assign-grid,.workflow-line{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><div class="logo">📊</div>RFP Decision Intelligence <span class="small" style="color:#b9defa">Prototype v9</span></div>
+  <div class="pills"><span class="pill">사업개요 페이지 추가</span><span class="pill">참여기관 수 연동</span><span class="pill">결과보고서 별도 생성</span></div>
+</header>
+
+<main>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="stitle">페이지 구성</div>
+    <div class="step active" onclick="showScreen('upload', this)"><div class="num">1</div><div><h4>파일 업로드</h4><p>공고문과 한글파일 분석</p></div></div>
+    <div class="step" onclick="showScreen('overview', this)"><div class="num">2</div><div><h4>사업개요</h4><p>예산·기간·내용·기관수</p></div></div>
+    <div class="step" onclick="showScreen('head', this)"><div class="num">3</div><div><h4>부서장 판단</h4><p>책임자·부서예산 포함</p></div></div>
+    <div class="step" onclick="showScreen('admin', this)"><div class="num">4</div><div><h4>행정부 판단</h4><p>계약·예산·기관위험</p></div></div>
+    <div class="step" onclick="showScreen('exec', this)"><div class="num">5</div><div><h4>부문장 판단</h4><p>수주·전략·투자</p></div></div>
+    <div class="step" onclick="showScreen('report', this)"><div class="num">6</div><div><h4>결과보고서 생성</h4><p>별도 파일 생성·결재 상신</p></div></div>
+  </aside>
+
+  <section>
+    <div id="upload" class="screen on">
+      <div class="hero"><div class="eyebrow">Page 1 · Upload</div><h1>공고문과 한글파일을 업로드하면 자동 검토가 시작됩니다</h1><p>공고문/RFP는 전체 사업의 요구사항을, 한글파일은 내부 사업정보·예산·기관정보를 추출하는 용도로 사용합니다.</p></div>
+      <div class="upload-start-card">
+        <div class="upload-left"><div class="upload-icon">📄</div><h2>공고문 / RFP / 위험요소 HWP 업로드</h2><p>업로드 후 AI가 사업개요, 참여기관 수, 사업책임자, 사업부서 예산, 주요 사업내용을 자동 추출합니다.</p><div class="upload-drop"><strong>파일을 여기에 끌어오거나 클릭하여 업로드</strong><span>PDF · HWP · HWPX · DOCX</span></div><div class="btns"><button class="btn primary" onclick="simulateUpload()">샘플 파일 분석 시작</button><button class="btn">공고문 선택</button><button class="btn">위험요소 HWP 선택</button></div></div>
+        <div class="upload-right"><h3>분석 후 자동 생성</h3><div class="auto-list"><div><b>① 사업개요 페이지</b><span>전체 예산, 사업기간, 주요 사업내용, 참여기관 수</span></div><div><b>② 부서장 판단 초안</b><span>사업책임자, 사업부서 예산, 기술·수행 판단</span></div><div><b>③ 행정부 판단 초안</b><span>참여기관 수와 신용·재정 위험 연동</span></div><div><b>④ 결과보고서 별도 생성</b><span>결재 상신용 결과보고서 파일과 레이더 차트</span></div></div></div>
+      </div>
+
+      <div class="card assign-card">
+        <h2>평가자 및 결재 검토자 지정</h2>
+        <p class="muted">파일 업로드 시 부서장이 검토를 시작하면, 지정된 행정부와 부문장에게 평가 요청이 전달되는 흐름입니다. 프로토타입에서는 기본값으로 오주혜 선임과 송용식 부사장을 반영했습니다.</p>
+        <div class="assign-grid">
+          <div class="assign-box"><b>부서장 / 최초 평가자</b><input class="field" id="reviewHead" value="최흥배 부서장" oninput="syncReviewerNames()"><span>공고문 업로드 및 1차 수주검토</span></div>
+          <div class="assign-box"><b>행정부 검토자</b><input class="field" id="reviewAdmin" value="오주혜 선임" oninput="syncReviewerNames()"><span>예산·계약·참여기관 위험 검토</span></div>
+          <div class="assign-box"><b>부문장 검토자</b><input class="field" id="reviewExec" value="송용식 부사장" oninput="syncReviewerNames()"><span>수주·전략·투자 판단</span></div>
+        </div>
+        <div class="workflow-line">
+          <div><b>1</b><span>부서장 평가</span></div>
+          <div><b>2</b><span>행정부 평가 요청</span></div>
+          <div><b>3</b><span>부문장 평가 요청</span></div>
+          <div><b>4</b><span>결과보고서 생성</span></div>
+        </div>
+      </div>
+      <div id="analysisProgress" class="card" style="display:none"><h2>AI 분석 진행 중</h2><div class="progress-line"><span id="progressBar"></span></div><div class="progress-steps"><div id="p1">공고문 텍스트 추출</div><div id="p2">HWP 주요내용 추출</div><div id="p3">참여기관 수 매핑</div><div id="p4">사업개요 생성</div></div></div>
+      <div id="uploadResult" class="card" style="display:none"><h2>분석 완료</h2><div class="meta-grid"><div class="meta"><b>사업명</b><span>민군경 AI 기반 해양영상 융복합 분석기술개발</span></div><div class="meta"><b>전체 예산</b><span>총 150억 원 이내</span></div><div class="meta"><b>사업기간</b><span>4년 이내</span></div><div class="meta"><b>참여기관 수</b><span id="uploadInstCount">7개</span></div></div><div class="btns"><button class="btn primary" onclick="showScreenById('overview',1)">사업개요 페이지로 이동</button></div></div>
+    </div>
+
+    <div id="overview" class="screen">
+      <div class="hero"><div class="eyebrow">Page 2 · Project overview</div><h1>사업개요 및 주요 사업내용</h1><p>파일 업로드 후 첫 번째로 전체 사업의 예산, 기간, 주요 내용, 참여기관 수를 확인합니다. 참여기관 수는 행정부 판단의 기관관리 리스크와 자동 연동됩니다.</p></div>
+      <div class="card"><h2>전체 사업 기본정보</h2><div class="meta-grid"><div class="meta"><b>사업명</b><span>민군경 AI 기반 해양영상 융복합 분석기술개발</span></div><div class="meta"><b>전체 사업 예산</b><span>총 150억 원 이내</span></div><div class="meta"><b>당해연도 예산</b><span>35억 원 이내</span></div><div class="meta"><b>전체 사업기간</b><span>2026.04 ~ 2029.12 이내</span></div><div class="meta"><b>발주/전문기관</b><span>해양수산부 / KIMST</span></div><div class="meta"><b>선정과제수</b><span>1개</span></div><div class="meta"><b>과제성격</b><span>연구개발</span></div><div class="meta"><b>보안과제</b><span>일반과제</span></div></div></div>
+      <div class="columns">
+        <div class="card"><h2>주요 사업내용</h2><textarea class="textarea" id="majorContent" oninput="syncReport()">해양안보, 안전·재난 예방 및 실시간 대응 체계 강화를 위해 해양환경, 객체 및 안전사고 등에 대한 자동탐지·식별 등을 위한 AI 기반 해양영상 융복합분석 기술개발 및 실증
+
+- 해양객체 자동탐지 및 식별 AI 알고리즘 통합·고도화
+- 온디바이스 AI 기반 지능형 감시 기술 개발
+- 해양영상·센서 데이터 실시간 융합 멀티모달 분석
+- 해양영토 관련 플랫폼 연계 및 통합 플랫폼 실증</textarea></div>
+        <div class="card"><h2>참여기관 설정</h2><div class="form-row"><label>참여기관 수</label><input class="field" type="number" min="1" max="20" value="7" id="instCount" oninput="updateInstitutionCount()"></div><div class="form-row"><label>주관/공동/위탁 구조</label><select class="field" id="consortiumType" onchange="updateInstitutionCount()"><option>주관+공동 다기관</option><option>주관+공동+위탁</option><option>공동참여 중심</option><option>위탁기관 포함</option></select></div><div class="matrix-note" id="instRiskNote">참여기관 수 7개: 기관 간 역할분담, 계약관리, 산출물 책임, 정산관리 리스크가 중간~높음으로 자동 반영됩니다.</div><div class="btns"><button class="btn primary" onclick="showScreenById('head',2)">부서장 판단으로 이동</button><button class="btn" onclick="showScreenById('admin',3)">행정부 판단으로 이동</button></div></div>
+      </div>
+    </div>
+
+    <div id="head" class="screen">
+      <div class="hero"><div class="eyebrow">Page 3 · Department Head</div><h1>부서장 판단 매트릭스</h1><p>부서장은 사업책임자, 사업부서 예산, 기술·수행·데이터 리스크를 중심으로 판단합니다.</p></div>
+      <div class="page-grid">
+        <div class="card">
+          <h2>부서장 기본 판단정보</h2>
+          <div class="form-row"><label>사업책임자</label><input class="field" id="pmName" value="박영민" oninput="syncReport()"></div>
+          <div class="form-row"><label>사업부서</label><input class="field" id="deptName" value="예보사업부" oninput="syncReport()"></div>
+          <div class="form-row"><label>전체 사업 예산</label><input class="field" id="totalBudget" value="15,000,000,000" oninput="updateDeptBudget()"></div>
+          <div class="form-row"><label>사업부서 예산 비율(%)</label><input class="field" id="deptBudgetRate" type="number" min="0" max="100" step="0.1" value="7.97" oninput="updateDeptBudget()"></div>
+          <div class="form-row"><label>사업부서 예산</label><input class="field" id="deptBudget" value="1,195,500,000원" readonly></div>
+          <div class="matrix-note" id="budgetAutoNote">전체 사업 예산 15,000,000,000원 × 사업부서 비율 7.97% = 사업부서 예산 1,195,500,000원</div>
+          <div class="form-row"><label>부서장 검토의견</label><textarea class="textarea" id="headComment" oninput="syncReport()">전략적 가치는 높으나, 데이터 확보와 외부기관 역할분담을 조건으로 참여 검토가 필요함.</textarea></div>
+
+          <h2>부서장 결정 항목</h2>
+          <div id="headFactors"></div>
+        </div>
+        <div><div class="decision-box"><h3>부서장 자동 해석</h3><p class="muted" id="headSummary"></p><div class="taglist" id="headTags"></div></div><div class="card"><h2>부서장 판단의 핵심</h2><ul class="muted"><li>사업책임자와 사업부서 예산이 현실적인가</li><li>우리 부서가 맡을 범위가 명확한가</li><li>데이터·실증·인력 조건이 충족 가능한가</li></ul></div></div>
+      </div>
+    </div>
+
+    <div id="admin" class="screen">
+      <div class="hero"><div class="eyebrow">Page 4 · Administration</div><h1>행정부 판단 매트릭스</h1><p>행정부는 참여기관 수와 신용·재정 안정성, 계약관리, 정산·감사 리스크를 판단합니다.</p></div>
+      <div class="page-grid">
+        <div class="card"><h2>행정부 결정 항목</h2><div class="matrix-note" id="adminLinkedNote">참여기관 수 7개가 반영되어 컨소시엄 계약관리 가능성 항목이 자동 보정됩니다.</div><div id="adminFactors"></div></div>
+        <div><div class="decision-box"><h3>행정부 자동 해석</h3><p class="muted" id="adminSummary"></p><div class="taglist" id="adminTags"></div></div><div class="card"><h2>참여기관 위험평가</h2><div class="institution-grid" id="institutionGrid"></div></div></div>
+      </div>
+    </div>
+
+    <div id="exec" class="screen">
+      <div class="hero"><div class="eyebrow">Page 5 · Executive Director</div><h1>부문장 판단 매트릭스</h1><p>부문장은 회사 차원의 수주 가능성, 전략적 가치, 투자 대비 파급효과, 위험수용성을 결정합니다.</p></div>
+      <div class="page-grid">
+        <div class="card"><h2>부문장 결정 항목</h2><div id="execFactors"></div></div>
+        <div><div class="decision-box"><h3>부문장 자동 해석</h3><p class="muted" id="execSummary"></p><div class="taglist" id="execTags"></div></div><div class="card"><h2>부문장 주요 검토 포인트</h2><ul class="muted"><li>수주 가능성 대비 투입가치가 있는가</li><li>회사 전략상 우선순위가 있는가</li><li>위험을 감수할 만큼 파급효과가 있는가</li></ul></div></div>
+      </div>
+    </div>
+
+    <div id="report" class="screen">
+      <div class="hero"><div class="eyebrow">Page 6 · Report generation</div><h1>자동 결과보고서 생성</h1><p>이 플랫폼 화면 안에 결과보고서 본문을 넣지 않고, 검토값을 바탕으로 별도 결과보고서 파일을 생성하는 구조입니다. 생성된 보고서 파일로 결재를 상신합니다.</p></div>
+
+      <div class="radar-wrap">
+        <div class="radar-card"><h3>부서장 레이더 차트</h3><div class="radar-sub">기술/인력/데이터/제안/통제/전략</div><svg id="radarHead" viewBox="0 0 340 320"></svg><div class="small" id="headAvgText"></div></div>
+        <div class="radar-card"><h3>행정부 레이더 차트</h3><div class="radar-sub">예산/계약/제출/기관/정산/관리</div><svg id="radarAdmin" viewBox="0 0 340 320"></svg><div class="small" id="adminAvgText"></div></div>
+        <div class="radar-card"><h3>부문장 레이더 차트</h3><div class="radar-sub">수주/수익/전략/우선/수용/파급</div><svg id="radarExec" viewBox="0 0 340 320"></svg><div class="small" id="execAvgText"></div></div>
+      </div>
+
+      <div class="combined">
+        <div class="radar-card"><h3>종합 평가 레이더 차트</h3><div class="radar-sub">기술수행/행정안정/전략가치/수익성/기관위험/위험수용</div><svg id="radarTotal" viewBox="0 0 340 320"></svg><div class="small">3개 역할 판단값을 결합한 종합 평가</div>
+          <div class="total-summary-box">
+            <h4>종합평가 결과 요약</h4>
+            <p id="totalSummaryText">종합평가 결과를 자동 산정 중입니다.</p>
+            <ul id="totalSummaryBullets"></ul>
+          </div>
+        </div>
+        <div class="card">
+          <h2>결과보고서 생성 설정</h2>
+          <div class="matrix-note">결과보고서 본문은 이 화면에 표시하지 않고 별도 HTML/DOCX/HWP/PDF 파일로 생성합니다. 현재 프로토타입에서는 샘플 결과보고서 HTML을 별도 파일로 제공합니다.</div>
+          <table class="summary-table" id="scoreTable"></table>
+          <div class="btns">
+            <a class="btn primary" href="../rfp_decision_platform_demo_v9_report/RFP_Decision_Intelligence_자동결과보고서_샘플_v9.html" target="_blank">샘플 결과보고서 HTML 열기</a>
+            <button class="btn">결과보고서 DOCX/HWP 생성</button>
+            <button class="btn">결과보고서 PDF 생성</button>
+            <button class="btn dark">결재 자동 상신</button>
+          </div>
+          <p class="small">※ 프로토타입에서는 샘플 결과보고서를 별도 HTML 파일로 제공합니다. 실제 구현 시 DOCX/HWP/PDF 템플릿으로 자동 출력하고 그룹웨어 결재 API와 연동합니다.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>결재 상신 흐름</h2>
+        <div class="approval-box">
+          <div class="approval-flow">
+            <div class="approval-step"><b>1차</b><span id="approvalHeadName">최흥배 부서장 확정</span></div>
+            <div class="approval-step"><b>2차</b><span id="approvalAdminName">오주혜 선임 확인</span></div>
+            <div class="approval-step"><b>3차</b><span id="approvalExecName">송용식 부사장 검토</span></div>
+            <div class="approval-step"><b>최종</b><span>대표 결재</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+</main>
+
+<script>
+const headLabels=["기술","인력","데이터","제안","통제","전략"];
+const adminLabels=["예산","계약","제출","기관","정산","관리"];
+const execLabels=["수주","수익","전략","우선","수용","파급"];
+const totalLabels=["기술수행","행정안정","전략가치","수익성","기관위험","위험수용"];
+const factorDefs={
+  head:[
+    ["핵심기술 적합도","해양영상 AI, 해양데이터, 위성·예측정보, 플랫폼 기술 중 우리 부서 강점과 직접 맞는 정도",4],
+    ["수행 인력 확보 가능성","사업책임자와 실무 인력을 실제 투입할 수 있는지",3],
+    ["데이터·실증 확보 가능성","영상·센서 데이터, 라벨링, 현장 실증, 기관 연계자료를 확보할 수 있는지",3],
+    ["제안 차별화 가능성","평가위원에게 설득 가능한 차별화 기술, 실적, 데이터, 시나리오를 제시할 수 있는지",4],
+    ["수행범위 통제 가능성","컨소시엄 내 당사 역할, 산출물 책임, 일정·품질을 통제할 수 있는지",3],
+    ["부서 전략 적합성","위성·AI·해양예측·AX 플랫폼 등 부서 중장기 방향과 맞는지",5]
+  ],
+  admin:[
+    ["예산·수익 구조 안정성","전체 예산, 사업부서 예산, 순익, 수익성, 원가추정 불확실성을 고려한 안정성",4],
+    ["계약·기술료 조건 수용성","기술료, 성과물 소유권, 기업참여, 연구비 부담 조건을 회사가 수용할 수 있는지",3],
+    ["행정 제출·IRIS 부담 적정성","제안서, 참여의사확인서, 증빙, 재무제표, IRIS 입력 등 제출 부담의 적정성",3],
+    ["참여기관 신용·재정 안정성","공동기관과 위탁기관의 신용등급, 재무상태, 지속 수행 가능성",3],
+    ["정산·감사 대응 안정성","연구비 집행, 증빙, 감사, 기술료 산정, 청년인력 등 사후관리 안정성",3],
+    ["컨소시엄 계약관리 가능성","기관 수와 역할분담을 고려한 협약·비용정산·자료제공 의무 관리 가능성",3]
+  ],
+  exec:[
+    ["수주 가능성","경쟁구도, 컨소시엄 경쟁력, 평가항목 대응력을 고려한 실제 수주 가능성",3],
+    ["사업성·수익성","매출, 순익, 수익성, 후속사업 가능성을 고려한 사업 가치",4],
+    ["전략적 중요도","해양 AI, AX 플랫폼, 대형 R&D 레퍼런스 확보 측면의 중요도",5],
+    ["조직 자원투입 우선순위","다른 사업과 비교해 핵심 인력과 조직 자원을 투입할 우선순위",4],
+    ["위험수용성","기술·데이터·기관·계약 리스크가 있어도 회사가 감내 가능한 수준인지",3],
+    ["대외 파급효과","정책연계, 후속과제, 브랜드, 레퍼런스 창출 효과",4]
+  ]
+};
+const institutions=["한국조선해양기자재연구원","한국해양과학기술원","㈜지오시스템리서치","㈜아이렘 기술개발","부산대학교 산학협력단","㈜산엔지니어링","㈜씨넷"];
+
+function parseMoney(v){
+  if(v === undefined || v === null) return 0;
+  const n = String(v).replace(/[^\d.-]/g,"");
+  return Number(n || 0);
+}
+function formatWon(n){
+  if(!isFinite(n)) n = 0;
+  return Math.round(n).toLocaleString("ko-KR") + "원";
+}
+function updateDeptBudget(){
+  const totalEl = document.getElementById("totalBudget");
+  const rateEl = document.getElementById("deptBudgetRate");
+  const budgetEl = document.getElementById("deptBudget");
+  const noteEl = document.getElementById("budgetAutoNote");
+  if(!totalEl || !rateEl || !budgetEl) return;
+  const total = parseMoney(totalEl.value);
+  const rate = Number(rateEl.value || 0);
+  const budget = total * rate / 100;
+  budgetEl.value = formatWon(budget);
+  if(noteEl){
+    noteEl.innerText = "전체 사업 예산 " + total.toLocaleString("ko-KR") + "원 × 사업부서 비율 " + rate + "% = 사업부서 예산 " + formatWon(budget);
+  }
+  syncReport();
+}
+
+
+function syncReviewerNames(){
+  const h = document.getElementById("reviewHead")?.value || "최흥배 부서장";
+  const a = document.getElementById("reviewAdmin")?.value || "오주혜 선임";
+  const e = document.getElementById("reviewExec")?.value || "송용식 부사장";
+  if(document.getElementById("approvalHeadName")) document.getElementById("approvalHeadName").innerText = h + " 확정";
+  if(document.getElementById("approvalAdminName")) document.getElementById("approvalAdminName").innerText = a + " 확인";
+  if(document.getElementById("approvalExecName")) document.getElementById("approvalExecName").innerText = e + " 검토";
+}
+
+function buildFactors(group, containerId){
+  const box=document.getElementById(containerId); box.innerHTML="";
+  factorDefs[group].forEach((f,i)=>{
+    const id=group+(i+1);
+    const d=document.createElement("div");
+    d.className="factor";
+    d.innerHTML=`<div class="factor-head"><div><div class="factor-title">${f[0]}</div><div class="help">${f[1]}</div></div></div><div class="score-row"><input type="range" min="1" max="5" value="${f[2]}" id="${id}" oninput="updateAll()"><div class="score-box"><b id="${id}v">${f[2]}</b><span>현재 점수</span></div></div>`;
+    box.appendChild(d);
+  });
+}
+function buildInstitutions(){
+  const count=parseInt(document.getElementById("instCount")?.value || 7,10);
+  const grid=document.getElementById("institutionGrid"); if(!grid) return; grid.innerHTML="";
+  for(let idx=0; idx<count; idx++){
+    const name=institutions[idx] || `참여기관 ${idx+1}`;
+    const d=document.createElement("div"); d.className="institution";
+    const credit = idx===0||idx===1||idx===4 ? 4 : 3;
+    const role = idx===2 ? 5 : 3;
+    const manage = count>=8 ? 2 : (count>=6 ? 3 : 4);
+    d.innerHTML=`<b>${name}</b><div class="mini-row"><label>신용·재정 안정성</label><span>${credit}</span></div><div class="mini-row"><label>역할 명확성</label><span>${role}</span></div><div class="mini-row"><label>계약관리 난이도</label><span>${manage}</span></div>`;
+    grid.appendChild(d);
+  }
+}
+function updateInstitutionCount(){
+  const count=parseInt(document.getElementById("instCount").value||1,10);
+  document.getElementById("uploadInstCount").innerText=count+"개";
+  /* 별도 결과보고서 파일 생성 구조: 화면 내 reportInstCount 미사용 */
+  let msg = count>=8 ? `참여기관 수 ${count}개: 기관 수가 많아 계약관리와 정산관리 리스크가 높게 반영됩니다.` : count>=5 ? `참여기관 수 ${count}개: 기관 간 역할분담, 계약관리, 산출물 책임 리스크가 중간~높음으로 반영됩니다.` : `참여기관 수 ${count}개: 기관관리 리스크는 비교적 낮지만 역할분담 확인은 필요합니다.`;
+  document.getElementById("instRiskNote").innerText=msg;
+  document.getElementById("adminLinkedNote").innerText=msg.replace("참여기관 수", "사업개요에서 설정한 참여기관 수");
+  const admin6=document.getElementById("admin6");
+  if(admin6){ admin6.value = count>=8 ? 2 : (count>=5 ? 3 : 4); }
+  buildInstitutions(); updateAll();
+}
+function getVals(prefix){let arr=[];for(let i=1;i<=6;i++){const el=document.getElementById(prefix+i); if(!el) continue; const v=parseInt(el.value,10);arr.push(v);document.getElementById(prefix+i+"v").innerText=v;}return arr;}
+function avg(a){return a.reduce((x,y)=>x+y,0)/a.length}
+function fillTags(elId, values, labels){const c=document.getElementById(elId); if(!c) return; c.innerHTML="";values.forEach((v,i)=>{let s=document.createElement("span");s.className="tag "+(v>=4?"good":(v==3?"mid":"bad"));s.textContent=labels[i]+" "+v+"점";c.appendChild(s);})}
+function summaryText(role, values){const a=avg(values); if(role==="head")return a>=4?"사업부 관점에서 적극 검토 가능한 사업입니다. 사업책임자와 부서예산을 기준으로 참여전략 구체화가 필요합니다.":a>=3?"전략성은 있으나 데이터·인력·수행범위 통제 조건을 보완해야 합니다.":"부서 수행 부담이 커 참여범위 축소 또는 보류 검토가 필요합니다."; if(role==="admin")return a>=4?"예산·계약·기관관리 측면에서 안정적으로 지원 가능한 사업입니다.":a>=3?"행정지원은 가능하나 참여기관 수, 계약조건, 정산관리 확인이 필요합니다.":"계약·정산·기관관리 리스크가 높아 사전 보완 없이는 부담이 큽니다."; return a>=4?"회사 차원의 전략사업으로 우선 검토할 가치가 높습니다.":a>=3?"전략적 가치는 있으나 수주 가능성, 위험수용성, 기관관리 조건부 검토가 필요합니다.":"회사 우선순위 또는 투자 대비 효과가 낮아 보류 검토가 필요합니다.";}
+function drawRadar(svgId, labels, values, cssClass){const svg=document.getElementById(svgId); if(!svg) return; const cx=170,cy=150,r=105,levels=5; svg.innerHTML=""; for(let lv=1;lv<=levels;lv++){let rr=r*(lv/levels),pts=[];for(let i=0;i<labels.length;i++){let ang=-Math.PI/2+i*2*Math.PI/labels.length;pts.push((cx+rr*Math.cos(ang)).toFixed(1)+","+(cy+rr*Math.sin(ang)).toFixed(1));}let p=document.createElementNS("http://www.w3.org/2000/svg","polygon");p.setAttribute("points",pts.join(" "));p.setAttribute("class","gridline");svg.appendChild(p);} for(let i=0;i<labels.length;i++){let ang=-Math.PI/2+i*2*Math.PI/labels.length,x=cx+r*Math.cos(ang),y=cy+r*Math.sin(ang);let line=document.createElementNS("http://www.w3.org/2000/svg","line");line.setAttribute("x1",cx);line.setAttribute("y1",cy);line.setAttribute("x2",x);line.setAttribute("y2",y);line.setAttribute("class","axis-line");svg.appendChild(line);let tx=document.createElementNS("http://www.w3.org/2000/svg","text");let lx=cx+(r+24)*Math.cos(ang),ly=cy+(r+20)*Math.sin(ang);tx.setAttribute("x",lx);tx.setAttribute("y",ly);tx.setAttribute("class","axis-label");tx.setAttribute("text-anchor",lx<cx-10?"end":(lx>cx+10?"start":"middle"));tx.textContent=labels[i];svg.appendChild(tx);} let pts=[];values.forEach((v,i)=>{let ang=-Math.PI/2+i*2*Math.PI/values.length,rr=r*(v/5);pts.push((cx+rr*Math.cos(ang)).toFixed(1)+","+(cy+rr*Math.sin(ang)).toFixed(1));});let poly=document.createElementNS("http://www.w3.org/2000/svg","polygon");poly.setAttribute("points",pts.join(" "));poly.setAttribute("class",cssClass);svg.appendChild(poly);values.forEach((v,i)=>{let ang=-Math.PI/2+i*2*Math.PI/values.length,rr=r*(v/5);let c=document.createElementNS("http://www.w3.org/2000/svg","circle");c.setAttribute("cx",cx+rr*Math.cos(ang));c.setAttribute("cy",cy+rr*Math.sin(ang));c.setAttribute("r",4.2);c.setAttribute("fill",cssClass.includes("admin")?"#d97706":(cssClass.includes("exec")?"#7c3aed":(cssClass.includes("total")?"#16a34a":"#2563eb")));svg.appendChild(c);});}
+
+function totalSummary(totalVals, hA, aA, eA){
+  const labels = totalLabels;
+  const pairs = labels.map((label, idx)=>({label, score: totalVals[idx]}));
+  const strong = pairs.filter(x=>x.score>=4).map(x=>x.label);
+  const weak = pairs.filter(x=>x.score<3.2).sort((a,b)=>a.score-b.score);
+  const top = pairs.slice().sort((a,b)=>b.score-a.score)[0];
+  const low = pairs.slice().sort((a,b)=>a.score-b.score)[0];
+  let decision = "";
+  const overall = avg(totalVals);
+  if(overall>=4){
+    decision = "종합평가 결과, 사업 참여 타당성이 높은 편입니다. 기술·전략·수익 측면의 장점이 확인되므로 조건 보완 후 적극 참여 검토가 가능합니다.";
+  }else if(overall>=3){
+    decision = "종합평가 결과, 조건부 참여가 적절합니다. 전략적 가치는 있으나 기관관리, 데이터·실증, 계약조건 등 일부 리스크를 사전에 보완해야 합니다.";
+  }else{
+    decision = "종합평가 결과, 현 상태에서는 참여 보류 또는 재검토가 필요합니다. 핵심 리스크 보완 전에는 결재 상신보다 조건 재검토가 우선입니다.";
+  }
+  const bullets = [];
+  bullets.push("가장 강한 축: " + top.label + " " + top.score.toFixed(2) + "점");
+  bullets.push("보완이 필요한 축: " + low.label + " " + low.score.toFixed(2) + "점");
+  bullets.push("부서장 " + hA.toFixed(2) + "점, 행정부 " + aA.toFixed(2) + "점, 부문장 " + eA.toFixed(2) + "점으로 역할별 판단 차이를 확인했습니다.");
+  if(weak.length>0){
+    bullets.push("우선 보완 대상: " + weak.map(x=>x.label).join(", "));
+  }else{
+    bullets.push("전체 평가축이 보통 이상으로, 주요 리스크는 관리 가능한 범위로 판단됩니다.");
+  }
+  return {decision, bullets};
+}
+
+function finalDecision(h,a,e){let t=(h+a+e)/3;if(t>=4&&Math.min(h,a,e)>=3.5)return["적극 참여 권고","green",["대표 결재 후 제안 준비 즉시 착수","사업책임자와 핵심 인력 조기 확정","참여기관 역할분담 및 데이터 제공 협의 선제 추진","부서예산 및 사업범위 확정"]];if(t>=3)return["조건부 참여 권고","amber",["사업책임자와 사업부서 예산 기준으로 참여범위 확정","참여기관 수에 따른 계약·정산관리 계획 필요","데이터 제공 범위 및 실증조건 사전 협의","계약·기술료·성과물 조건 검토 후 결재 상신"]];return["참여 보류 또는 재검토","red",["핵심 리스크 보완 전 참여 보류","사업부서 예산과 인력투입 재검토","기관 위험과 계약조건 재검토","참여범위 축소 또는 외부협력 재협상"]];}
+function updateTable(h,a,e,totalVals){let table=document.getElementById("scoreTable"); if(!table) return; table.innerHTML='<tr><th>구분</th><th>평균점수</th><th>자동판단</th><th>주요 시사점</th></tr>';[["부서장",h,h>=4?"긍정":(h>=3?"조건부":"주의"),"사업책임자·부서예산·기술수행 관점"],["행정부",a,a>=4?"긍정":(a>=3?"조건부":"주의"),"예산·계약·참여기관 위험 관점"],["부문장",e,e>=4?"긍정":(e>=3?"조건부":"주의"),"수주·전략·투자 관점"],["종합",avg(totalVals),avg(totalVals)>=4?"참여권고":(avg(totalVals)>=3?"조건부":"재검토"),"세 역할 판단값 종합"]].forEach(r=>{let tr=document.createElement("tr");tr.innerHTML=`<td>${r[0]}</td><td>${r[1].toFixed(2)}</td><td>${r[2]}</td><td>${r[3]}</td>`;table.appendChild(tr);});}
+function syncReport(){if(document.getElementById("reportMajorContent")) document.getElementById("reportMajorContent").innerText=document.getElementById("majorContent")?.value||"";if(document.getElementById("reportPm")) document.getElementById("reportPm").innerText=document.getElementById("pmName")?.value||"";if(document.getElementById("reportDept")) document.getElementById("reportDept").innerText=document.getElementById("deptName")?.value||"";if(document.getElementById("reportDeptBudget")) document.getElementById("reportDeptBudget").innerText=document.getElementById("deptBudget")?.value||"";if(document.getElementById("reportHeadComment")) document.getElementById("reportHeadComment").innerText=document.getElementById("headComment")?.value||"";}
+function updateAll(){const h=getVals("head"),a=getVals("admin"),e=getVals("exec"); if(h.length<6||a.length<6||e.length<6) return; fillTags("headTags",h,headLabels);fillTags("adminTags",a,adminLabels);fillTags("execTags",e,execLabels);document.getElementById("headSummary").innerText=summaryText("head",h);document.getElementById("adminSummary").innerText=summaryText("admin",a);document.getElementById("execSummary").innerText=summaryText("exec",e);drawRadar("radarHead",headLabels,h,"radar-fill-head");drawRadar("radarAdmin",adminLabels,a,"radar-fill-admin");drawRadar("radarExec",execLabels,e,"radar-fill-exec");const hA=avg(h),aA=avg(a),eA=avg(e);const totalVals=[(h[0]+h[1])/2,aA,(e[2]+h[5])/2,(e[1]+a[0])/2,a[3],(e[4]+h[4])/2];drawRadar("radarTotal",totalLabels,totalVals,"radar-fill-total");
+  const totalObj = totalSummary(totalVals,hA,aA,eA);
+  if(document.getElementById("totalSummaryText")) document.getElementById("totalSummaryText").innerText = totalObj.decision;
+  const tsb = document.getElementById("totalSummaryBullets");
+  if(tsb){ tsb.innerHTML = ""; totalObj.bullets.forEach(x=>{let li=document.createElement("li");li.textContent=x;tsb.appendChild(li);}); }document.getElementById("headAvg").innerText=hA.toFixed(2);document.getElementById("adminAvg").innerText=aA.toFixed(2);document.getElementById("execAvg").innerText=eA.toFixed(2);document.getElementById("headAvgText").innerText="평균 "+hA.toFixed(2)+"점";document.getElementById("adminAvgText").innerText="평균 "+aA.toFixed(2)+"점";document.getElementById("execAvgText").innerText="평균 "+eA.toFixed(2)+"점";document.getElementById("finalNarrative").innerText=(hA>=3.5?"부서장은 사업책임자와 부서예산을 기준으로 기술·수행 가능성을 긍정적으로 봅니다. ":"부서장은 수행조건 보완이 필요하다고 봅니다. ")+(aA>=3.5?"행정부는 예산·계약·참여기관 관리가 대체로 가능하다고 판단합니다. ":"행정부는 계약·기관위험·정산 측면의 추가확인이 필요하다고 판단합니다. ")+(eA>=3.5?"부문장은 전략적 가치와 파급효과를 긍정적으로 평가합니다.":"부문장은 수주 가능성 또는 리스크 수용성을 조건부로 보고 있습니다.");let[label,cls,bullets]=finalDecision(hA,aA,eA);let badge=document.getElementById("finalBadge");badge.className="badge "+cls;badge.innerText=label;let ul=document.getElementById("finalBullets");ul.innerHTML="";bullets.forEach(x=>{let li=document.createElement("li");li.textContent=x;ul.appendChild(li);});updateTable(hA,aA,eA,totalVals);syncReport();}
+function simulateUpload(){document.getElementById("analysisProgress").style.display="block";document.getElementById("uploadResult").style.display="none";const bar=document.getElementById("progressBar");["p1","p2","p3","p4"].forEach(id=>document.getElementById(id).classList.remove("done"));bar.style.width="0%";let i=0;const steps=["p1","p2","p3","p4"];let timer=setInterval(()=>{if(i<steps.length){document.getElementById(steps[i]).classList.add("done");bar.style.width=((i+1)*25)+"%";i++;}else{clearInterval(timer);document.getElementById("uploadResult").style.display="block";}},450);}
+function showScreen(id,el){document.querySelectorAll(".screen").forEach(s=>s.classList.remove("on"));document.getElementById(id).classList.add("on");document.querySelectorAll(".step").forEach(s=>s.classList.remove("active"));el.classList.add("active");window.scrollTo({top:0,behavior:"smooth"});}
+function showScreenById(id,idx){document.querySelectorAll(".screen").forEach(s=>s.classList.remove("on"));document.getElementById(id).classList.add("on");document.querySelectorAll(".step").forEach(s=>s.classList.remove("active"));document.querySelectorAll(".step")[idx].classList.add("active");window.scrollTo({top:0,behavior:"smooth"});}
+buildFactors("head","headFactors");buildFactors("admin","adminFactors");buildFactors("exec","execFactors");buildInstitutions();updateInstitutionCount();updateDeptBudget();syncReviewerNames();syncReport();updateAll();
+</script>
+</body>
+</html>
