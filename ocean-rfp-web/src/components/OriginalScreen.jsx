@@ -1,4 +1,5 @@
 import { getProject } from '../data/projects.js'
+import { DownloadIcon } from './icons.jsx'
 
 function InfoCard({ title, items }) {
   return (
@@ -65,10 +66,22 @@ export default function OriginalScreen({ id, onBack, onSummary }) {
     <main className="detail">
       <button className="back" onClick={onBack}>← 프로젝트 목록으로</button>
 
-      <div className="head">
-        <div>
-          <h1>{p.name}</h1>
-        </div>
+      <div className="head doc-head">
+        <h1>{p.name}</h1>
+        {p.download?.has ? (
+          <a
+            className="dl-btn"
+            href={`${import.meta.env.BASE_URL}${p.download.file}`}
+            download={p.download.name}
+            title={`원문 자료 다운로드 (${p.download.name})`}
+          >
+            <DownloadIcon /> 원문 다운로드
+          </a>
+        ) : (
+          <span className="dl-btn disabled" title="원문 파일이 등록되지 않았습니다">
+            <DownloadIcon /> 원문 준비중
+          </span>
+        )}
       </div>
 
       <div className="glass section">

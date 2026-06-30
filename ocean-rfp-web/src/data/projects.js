@@ -3,11 +3,24 @@
 import data from './projects.json'
 
 // 표시용 보강 (디자인 시안 기준 — 목록 칩/단축 라벨)
+// download.file: public/originals/ 아래 파일명 | download.name: 저장될 파일명 | download.has: 파일 등록 여부
 const AUGMENT = {
-  coast: { tags: ['복합침수', 'ADCIRC', '50개소'], budgetShort: '25억', endLabel: '2026.12' },
-  satellite: { tags: ['다종위성', 'ATBD', '북극항로'], budgetShort: '19억', endLabel: '2026.12' },
-  ecology: { tags: ['플랑크톤', '먹이망', 'AI 분석'], budgetShort: '5.3억', endLabel: '2026.12' },
-  ai: { tags: ['멀티모달', '온디바이스 AI', '객체탐지'], budgetShort: '150억', endLabel: '2029.12' },
+  coast: {
+    tags: ['복합침수', 'ADCIRC', '50개소'], budgetShort: '25억', endLabel: '2026.12',
+    download: { file: 'originals/coast.hwpx', name: '2026_해안침수예상도_제작_제안요청서.hwpx', has: true },
+  },
+  satellite: {
+    tags: ['다종위성', 'ATBD', '북극항로'], budgetShort: '19억', endLabel: '2026.12',
+    download: { file: 'originals/satellite.pdf', name: '2026_해양위성정보_종합분석_제안요청서.pdf', has: false },
+  },
+  ecology: {
+    tags: ['플랑크톤', '먹이망', 'AI 분석'], budgetShort: '5.3억', endLabel: '2026.12',
+    download: { file: 'originals/ecology.hwpx', name: '연근해_저차해양생태계_먹이망_제안요청서.hwpx', has: false },
+  },
+  ai: {
+    tags: ['멀티모달', '온디바이스 AI', '객체탐지'], budgetShort: '150억', endLabel: '2029.12',
+    download: { file: 'originals/ai.pdf', name: '민군경_AI_해양영상_공고문.pdf', has: true },
+  },
 }
 
 export const projects = data.map((p) => ({ ...p, ...AUGMENT[p.id] }))

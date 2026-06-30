@@ -15,6 +15,15 @@ export function WaveMark({ size = 20, stroke = '#06121f', width = 2.2 }) {
   )
 }
 
+export function DownloadIcon({ size = 16, stroke = 'currentColor' }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <path d="M12 3v12m0 0l-4.5-4.5M12 15l4.5-4.5" stroke={stroke} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2" stroke={stroke} strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  )
+}
+
 export function SearchIcon({ size = 13, stroke = '#7d93b8' }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
