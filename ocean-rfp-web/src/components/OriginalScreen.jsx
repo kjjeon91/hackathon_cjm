@@ -71,9 +71,9 @@ export default function OriginalScreen({ id, onBack, onSummary }) {
         {p.download?.has ? (
           <a
             className="dl-btn"
-            href={`${import.meta.env.BASE_URL}${p.download.file}`}
-            download={p.download.name}
-            title={`원문 자료 다운로드 (${p.download.name})`}
+            href={`${import.meta.env.BASE_URL}originals/${encodeURIComponent(p.download.file)}`}
+            download={p.download.file}
+            title={`원문 자료 다운로드 (${p.download.file})`}
           >
             <DownloadIcon /> 원문 다운로드
           </a>
