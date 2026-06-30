@@ -68,8 +68,8 @@ button { font-family: inherit; cursor: pointer; }
 .agency-btn:hover { color: var(--cy2); border-color: rgba(90, 235, 215, 0.3); background: rgba(90, 235, 215, 0.06); }
 .agency-btn.on { color: #070b16; background: linear-gradient(135deg, #3ddccb, #7a8cff); border-color: transparent; font-weight: 800; }
 .filteron { font-size: 12px; font-weight: 700; color: var(--cy2); margin-left: 8px; }
-.clearfilter { color: #c7d0ff; border-color: rgba(140, 160, 255, 0.45); background: rgba(111, 123, 255, 0.18); font-weight: 700; cursor: pointer; }
-.clearfilter:hover { background: rgba(111, 123, 255, 0.3); border-color: rgba(140, 160, 255, 0.7); color: #fff; }
+.clearfilter { color: var(--muted2); border: 1px solid rgba(150, 180, 235, 0.18); background: transparent; cursor: pointer; }
+.clearfilter:hover { color: var(--cy2); border-color: rgba(90, 235, 215, 0.35); background: rgba(255, 255, 255, 0.04); }
 .online { display: inline-flex; align-items: center; gap: 6px; color: var(--cy2); }
 .online::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--cy); box-shadow: 0 0 10px var(--cy); }
 
