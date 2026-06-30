@@ -24,6 +24,16 @@ function lineClass(t) {
   return 'ol-p'
 }
 
+// 표 추출 잔해(추진일정표 등) 감지 — 표 구조가 깨져 한 줄로 뭉친 라인
+function isTableDump(t) {
+  if (/추진\s*일정\s*\(개월\)|공정\s*\(%\)|누계\s*공정/.test(t)) return true
+  if (t.length > 180) {
+    const digits = (t.match(/\d/g) || []).length
+    if (digits / t.length > 0.12) return true
+  }
+  return false
+}
+
 function OriginalDoc({ text }) {
   const lines = text.split('\n')
   return (
@@ -31,6 +41,14 @@ function OriginalDoc({ text }) {
       {lines.map((raw, i) => {
         const t = raw.trim()
         if (t === '') return <div key={i} className="ol-gap" />
+        if (isTableDump(t)) {
+          return (
+            <div key={i} className="ol-table">
+              <span className="ol-table-tag">원문 표 (추출 원본)</span>
+              {t}
+            </div>
+          )
+        }
         return <div key={i} className={lineClass(t)}>{t}</div>
       })}
     </div>
