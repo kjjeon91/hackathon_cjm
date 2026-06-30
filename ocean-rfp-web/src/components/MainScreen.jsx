@@ -23,8 +23,7 @@ export default function MainScreen({ onOpen, agencies, onAgency, onClearAgency }
   return (
     <main>
       <p className="lead">
-        분석된 제안요청서의 사업요약·핵심 용어·원문을 한 화면에서 탐색합니다. 발주처 필터와
-        검색으로 원하는 사업을 빠르게 찾을 수 있습니다.
+        제안요청서의 요약·핵심 용어·원문을 한 화면에서. 발주처 필터·검색으로 빠르게 탐색하세요.
       </p>
 
       <KpiDeck list={list} />

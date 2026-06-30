@@ -56,20 +56,23 @@ export default function App() {
       <div className="bg-grid" />
       <div className="app">
         <StatusBar now={now} />
-        {view.screen === 'main' && (
-          <MainScreen
-            onOpen={openSummary}
-            agencies={agencies}
-            onAgency={selectAgency}
-            onClearAgency={clearAgencies}
-          />
-        )}
-        {view.screen === 'summary' && (
-          <SummaryScreen id={view.id} onBack={goMain} onOriginal={openOriginal} />
-        )}
-        {view.screen === 'original' && (
-          <OriginalScreen id={view.id} onBack={goMain} onSummary={openSummary} />
-        )}
+        {/* 페이지 전환 시 key 변경 → 다이나믹 페이드·슬라이드 애니메이션 재생 */}
+        <div className="screen-anim" key={`${view.screen}-${view.id ?? 'main'}`}>
+          {view.screen === 'main' && (
+            <MainScreen
+              onOpen={openSummary}
+              agencies={agencies}
+              onAgency={selectAgency}
+              onClearAgency={clearAgencies}
+            />
+          )}
+          {view.screen === 'summary' && (
+            <SummaryScreen id={view.id} onBack={goMain} onOriginal={openOriginal} />
+          )}
+          {view.screen === 'original' && (
+            <OriginalScreen id={view.id} onBack={goMain} onSummary={openSummary} />
+          )}
+        </div>
       </div>
     </>
   )
