@@ -95,6 +95,31 @@ function fenceText(secLines) {
   return out.join('\n').trim()
 }
 
+// 원문 정규화 — PDF/HWPX 추출 흔적 제거 (원문 보존, 보수적 규칙만)
+function normalizeOriginal(text) {
+  // 1) 페이지 마커·구분선·섹션 페이지번호 줄 제거
+  let lines = text.split('\n').filter((l) => {
+    const t = l.trim()
+    if (/^━+$/.test(t)) return false // 페이지 구분선
+    if (/^\[p\.\d+\]$/.test(t)) return false // [p.29]
+    if (/^-\s*\d+\s*-$/.test(t)) return false // "- 29 -" 페이지번호
+    if (/^\d+-$/.test(t)) return false // "1-" "2-" 섹션 페이지 마커
+    return true
+  })
+  let out = lines.join('\n')
+
+  // 2) 명백히 끊긴 숫자/연도 줄바꿈만 결합 (진짜 목록 항목은 건드리지 않음)
+  out = out.replace(/,[ \t]*\n{1,2}[ \t]*(\d+\))/g, ', $1') // "별첨(붙임 4,\n\n5)" → ", 5)"
+  out = out.replace(/(~)[ \t]*\n{1,2}[ \t]*(\d+\))/g, '$1$2') // "(1~\n\n8)" → "(1~8)"
+  out = out.replace(/(-)[ \t]*\n{1,2}[ \t]*(\d+\))/g, '$1$2') // "D-\n\n2)" → "D-2)"
+  out = out.replace(/([A-Za-z])[ \t]*\n{1,2}[ \t]*(\d{4})\b/g, '$1 $2') // "EurOtop\n\n2018"
+  out = out.replace(/SSP[ ]?(\d+-\d+)\.[ \t]*\n{1,2}[ \t]*(\d+)\)/g, 'SSP $1.$2)') // "SSP 5-8.\n\n5)"
+
+  // 3) 과도한 빈 줄 정리
+  out = out.replace(/\n{3,}/g, '\n\n')
+  return out.trim()
+}
+
 // 기본정보 표: | 항목 | 값 |
 function basicInfo(secLines) {
   const map = {}
@@ -143,7 +168,7 @@ const projects = PROJECTS.map(({ id, h1 }) => {
     deliverables: fenceBullets(section(chunk, '주요 산출물')),
     keyInfo: KEY_INFO[id] || [],
     terms: terms(section(chunk, '상세 용어해설')),
-    original: fenceText(section(chunk, '원본 사업내용')),
+    original: normalizeOriginal(fenceText(section(chunk, '원본 사업내용'))),
   }
 })
 
