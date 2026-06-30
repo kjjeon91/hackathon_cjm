@@ -138,6 +138,16 @@
 - 결과: ① 푸시 전 점검 — API 키 누출 0, `proposal.db`/`__pycache__` 정크 제외(.gitignore 보강). ② 원격이 앞서 있어(팀원 agent3가 v9/v13 리포트 푸시) 충돌 → **원격의 겹치는 파일은 전부 빈 템플릿(agent2_extract 0줄·db_manager 0줄·PROCESS_LOG 빈양식)** 임을 확인 후, `merge -X ours`로 **내 구현 유지 + agent3 리포트 보존** 안전 병합. ③ `src/db/README.md` 신규 — agent3가 SQLite 읽는 법(조회 함수 9종·실제 반환 예시·React용 FastAPI 래퍼 8줄·화면 탭↔함수 매핑). ④ 커밋·푸시로 팀 공유.
 - 막힘 → 해결: git push가 non-fast-forward로 거부 → fetch로 원격 내용 검증(빈 템플릿 확인) 후 `-X ours` 병합으로 팀원 작업(agent3 리포트) 손실 없이 통합.
 
+### [#12] 프론트엔드(React) 플랫폼 구축 + Cloudflare 배포 (진행 중)
+- 작성자(팀원): 마경림(mkr)
+- 목표: plus1 스펙("RFP Decision Intelligence v9 — 수주검토 의사결정 플랫폼")을 React로 구현하고 Cloudflare로 웹에 띄운다.
+- 에이전트에게 시킨 것(실제 프롬프트 핵심 인용):
+  > "md파일과 html파일을 보고 … 프론트엔드 디자인 스킬 / refero.design / 21st.dev / pretendard 폰트 / 모든 해상도 반응형 / 최소 12pt / React 기반으로 랜더링"
+  > "완성하고나면 cloudflare 이용해서 웹에 띄워줘"
+- 사용한 기법: (a) 서브에이전트 — UI 전문 `designer`(opus)에 멀티파일 React 빌드 위임 / (b) 외부 도구 — Vite·Tailwind·Pretendard CDN·Cloudflare Pages
+- 결과: ① plus1.md(6단계 플랫폼 구조)·plus1.html(결과보고서 v9 샘플: 팔레트·레이더 SVG·10섹션·결재란) 분석 후 디자인 브리프 작성. ② `designer` 에이전트에 위임 — Vite+React18+TS+Tailwind v3, `frontend/`에 6단계 플로우(업로드+평가자지정→사업개요→부서장/행정부/부문장 판단(레이더)→결과보고서 설정(예산 자동산정))+종합평가+인쇄용 결과보고서 뷰, Pretendard·navy/blue 컨셉·반응형(QHD/FHD)·최소12px·레이더 React 컴포넌트 직접구현, DESIGN.md/README 포함, `npm run build` 검증 요구. ③ **빌드 완료 후 Cloudflare Pages 배포 예정**(`wrangler pages deploy dist`). (빌드/배포 결과는 완료 후 보강)
+- 막힘 → 해결: Cloudflare 사전점검(`npx wrangler`)이 designer의 `npm install`과 npm 캐시 충돌(EACCES) → 동시 실행 회피 위해 배포 준비를 빌드 완료 후로 미룸. `CLOUDFLARE_API_TOKEN` 미설정 → 배포 시 인증(wrangler login 또는 토큰) 필요.
+
 ---
 
 ## 마무리 요약 (1~2줄)

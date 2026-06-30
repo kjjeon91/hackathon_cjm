@@ -1,0 +1,8 @@
+1. 프론트엔드 디자인 스킬 설치 : 
+  - 프론트엔드 디자인 MD : https://getdesign.md/
+2. https://styles.refero.design/ 참고해서 우리 컨셉에 맞는 디자인 가져와서 해줘
+3. https://21st.dev/community/components 여기서 필요한 ui 요소 가져다 써
+4. pretendard 폰트로 작업
+5. QHD, FHD 등 모든 해상도에서 반응형으로 작동하게 해줘
+6. 최소 폰트 12포인트로, 가독성이 좋게해줘
+7. 플랫폼은 React기반으로 랜더링해줘

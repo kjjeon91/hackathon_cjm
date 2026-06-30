@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    margin: 0;
+    background: theme('colors.canvas');
+    color: theme('colors.ink');
+    font-family: theme('fontFamily.sans');
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* enforce 12px minimum legibility floor everywhere */
+  * {
+    box-sizing: border-box;
+  }
+
+  ::selection {
+    background: rgba(11, 78, 162, 0.15);
+  }
+}
+
+@layer components {
+  .focus-ring {
+    @apply outline-none ring-offset-2 ring-offset-white focus-visible:ring-2 focus-visible:ring-blue/60;
+  }
+}
+
+/* range slider styling (role judgement sliders) */
+input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 999px;
+  background: theme('colors.line');
+  outline: none;
+}
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: #fff;
+  border: 3px solid currentColor;
+  box-shadow: 0 2px 6px rgba(6, 22, 39, 0.18);
+  cursor: pointer;
+  transition: transform 0.12s ease;
+}
+input[type='range']::-webkit-slider-thumb:active {
+  transform: scale(1.12);
+}
+input[type='range']::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: #fff;
+  border: 3px solid currentColor;
+  box-shadow: 0 2px 6px rgba(6, 22, 39, 0.18);
+  cursor: pointer;
+}
+
+/* print styles for the report route */
+@media print {
+  body {
+    background: #fff;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-page {
+    box-shadow: none !important;
+    margin: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    max-width: none !important;
+  }
+  .print-header {
+    border-radius: 0 !important;
+  }
+  @page {
+    margin: 14mm;
+  }
+}
