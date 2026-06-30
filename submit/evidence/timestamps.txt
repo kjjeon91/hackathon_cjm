@@ -1,0 +1,93 @@
+# 산출물 타임스탬프 증빙 (자동 생성)
+갱신: 2026-06-30 16:11:23 KST
+
+## 출처
+- OpenHands 스킬 3종: github.com/OpenHands/OpenHands (.agents/skills, main)
+- 웹개발 스킬 4종: ui-skills.com registry → 각 원본 GitHub repo(main)
+
+## 설치된 스킬 (.claude/skills/)
+2026-06-30 13:51  .claude/skills/cross-repo-testing/SKILL.md
+2026-06-30 13:51  .claude/skills/upcoming-release/SKILL.md
+2026-06-30 13:51  .claude/skills/update-sdk/SKILL.md
+2026-06-30 13:51  .claude/skills/update-sdk/references/docker-image-locations.md
+2026-06-30 13:51  .claude/skills/update-sdk/references/sdk-pinning-examples.md
+2026-06-30 16:04  .claude/skills/baseline-ui/SKILL.md
+2026-06-30 16:04  .claude/skills/frontend-ui-engineering/SKILL.md
+2026-06-30 16:04  .claude/skills/shadcn/SKILL.md
+2026-06-30 16:04  .claude/skills/shadcn/agents/openai.yml
+2026-06-30 16:04  .claude/skills/shadcn/assets/shadcn-small.png
+2026-06-30 16:04  .claude/skills/shadcn/assets/shadcn.png
+2026-06-30 16:04  .claude/skills/shadcn/cli.md
+2026-06-30 16:04  .claude/skills/shadcn/customization.md
+2026-06-30 16:04  .claude/skills/shadcn/evals/evals.json
+2026-06-30 16:04  .claude/skills/shadcn/mcp.md
+2026-06-30 16:04  .claude/skills/shadcn/registry.md
+2026-06-30 16:04  .claude/skills/shadcn/rules/base-vs-radix.md
+2026-06-30 16:04  .claude/skills/shadcn/rules/chat.md
+2026-06-30 16:04  .claude/skills/shadcn/rules/composition.md
+2026-06-30 16:04  .claude/skills/shadcn/rules/forms.md
+2026-06-30 16:04  .claude/skills/shadcn/rules/icons.md
+2026-06-30 16:04  .claude/skills/shadcn/rules/styling.md
+2026-06-30 16:04  .claude/skills/web-design-guidelines/SKILL.md
+
+## 재사용 자산 사본 (submit/assets/)
+2026-06-30 14:02  submit/assets/openhands-skills/cross-repo-testing/SKILL.md
+2026-06-30 14:02  submit/assets/openhands-skills/upcoming-release/SKILL.md
+2026-06-30 14:02  submit/assets/openhands-skills/update-sdk/SKILL.md
+2026-06-30 14:02  submit/assets/openhands-skills/update-sdk/references/docker-image-locations.md
+2026-06-30 14:02  submit/assets/openhands-skills/update-sdk/references/sdk-pinning-examples.md
+2026-06-30 16:11  submit/assets/uiskills-web-skills/baseline-ui/SKILL.md
+2026-06-30 16:11  submit/assets/uiskills-web-skills/frontend-ui-engineering/SKILL.md
+2026-06-30 16:11  submit/assets/uiskills-web-skills/shadcn/SKILL.md
+2026-06-30 16:11  submit/assets/uiskills-web-skills/shadcn/agents/openai.yml
+2026-06-30 16:11  submit/assets/uiskills-web-skills/shadcn/assets/shadcn-small.png
+2026-06-30 16:11  submit/assets/uiskills-web-skills/shadcn/assets/shadcn.png
+2026-06-30 16:11  submit/assets/uiskills-web-skills/shadcn/cli.md
+2026-06-30 16:11  submit/assets/uiskills-web-skills/shadcn/customization.md
+2026-06-30 16:11  submit/assets/uiskills-web-skills/shadcn/evals/evals.json
+2026-06-30 16:11  submit/assets/uiskills-web-skills/shadcn/mcp.md
+2026-06-30 16:11  submit/assets/uiskills-web-skills/shadcn/registry.md
+2026-06-30 16:11  submit/assets/uiskills-web-skills/shadcn/rules/base-vs-radix.md
+2026-06-30 16:11  submit/assets/uiskills-web-skills/shadcn/rules/chat.md
+2026-06-30 16:11  submit/assets/uiskills-web-skills/shadcn/rules/composition.md
+2026-06-30 16:11  submit/assets/uiskills-web-skills/shadcn/rules/forms.md
+2026-06-30 16:11  submit/assets/uiskills-web-skills/shadcn/rules/icons.md
+2026-06-30 16:11  submit/assets/uiskills-web-skills/shadcn/rules/styling.md
+2026-06-30 16:11  submit/assets/uiskills-web-skills/web-design-guidelines/SKILL.md
+=== timestamps (updated 2026-06-30 16:33:06) ===
+2026-06-30 16:20  output/design_samples/dimension_page1.png
+2026-06-30 16:26  docs/DEV_PLAN.md
+2026-06-30 16:27  ocean-rfp-web/index.html
+2026-06-30 16:27  ocean-rfp-web/package.json
+2026-06-30 16:27  ocean-rfp-web/src/App.jsx
+2026-06-30 16:27  ocean-rfp-web/src/main.jsx
+2026-06-30 16:27  ocean-rfp-web/src/styles/dimension.css
+2026-06-30 16:27  ocean-rfp-web/vite.config.js
+2026-06-30 16:28  ocean-rfp-web/.gitignore
+2026-06-30 16:28  ocean-rfp-web/bun.lock
+=== Phase 2~7 산출물 (updated 2026-06-30 16:48:56) ===
+2026-06-30 16:20  output/design_samples/dimension_page1.png
+2026-06-30 16:26  docs/DEV_PLAN.md
+2026-06-30 16:27  ocean-rfp-web/src/main.jsx
+2026-06-30 16:34  ocean-rfp-web/scripts/parse_md.mjs
+2026-06-30 16:37  ocean-rfp-web/src/data/projects.json
+2026-06-30 16:38  ocean-rfp-web/src/data/projects.js
+2026-06-30 16:40  ocean-rfp-web/src/components/StatusBar.jsx
+2026-06-30 16:40  ocean-rfp-web/src/components/icons.jsx
+2026-06-30 16:41  ocean-rfp-web/src/components/KpiDeck.jsx
+2026-06-30 16:41  ocean-rfp-web/src/components/LlmPanel.jsx
+2026-06-30 16:41  ocean-rfp-web/src/components/ProjectList.jsx
+2026-06-30 16:42  ocean-rfp-web/src/components/MainScreen.jsx
+2026-06-30 16:43  ocean-rfp-web/src/components/SummaryScreen.jsx
+2026-06-30 16:43  ocean-rfp-web/src/components/TermCard.jsx
+2026-06-30 16:44  ocean-rfp-web/src/App.jsx
+2026-06-30 16:44  ocean-rfp-web/src/components/OriginalScreen.jsx
+2026-06-30 16:47  ocean-rfp-web/README.md
+2026-06-30 16:47  ocean-rfp-web/src/styles/dimension.css
+2026-06-30 16:47  output/design_samples/react_mobile.png
+2026-06-30 16:47  output/design_samples/react_page1_main.png
+2026-06-30 16:47  output/design_samples/react_page2_summary.png
+2026-06-30 16:47  output/design_samples/react_page3_original.png
+=== 개인 PROCESS_LOG (updated 2026-06-30 21:03:42) ===
+2026-06-30 21:03 submit/cool-cjm_chb_PROCESS_LOG.md
+2026-06-30 21:02 submit/cool-cjm_jgj_PROCESS_LOG.md
