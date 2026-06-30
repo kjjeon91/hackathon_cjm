@@ -14,12 +14,16 @@ export const projects = data.map((p) => ({ ...p, ...AUGMENT[p.id] }))
 
 export const getProject = (id) => projects.find((p) => p.id === id)
 
-// 상단바 기관 필터 (label=표시명, match=agency 포함 매칭)
+// 상단바 기관 필터 (label=표시명, match=agency 포함 매칭, color=기관 색상)
 export const AGENCIES = [
-  { label: '국립해양조사원', match: '해양조사원' }, // coast, satellite
-  { label: '수산과학원', match: '수산과학원' }, // ecology
-  { label: 'KIMST', match: 'KIMST' }, // ai
+  { label: '국립해양조사원', match: '해양조사원', color: '#3ddccb' }, // coast, satellite — aqua
+  { label: '수산과학원', match: '수산과학원', color: '#5fd38a' }, // ecology — green
+  { label: 'KIMST', match: 'KIMST', color: '#8a9bff' }, // ai — periwinkle
 ]
+
+// 발주처 → 색상
+export const agencyColor = (agency) =>
+  (AGENCIES.find((a) => agency.includes(a.match)) || {}).color || '#7d93b8'
 
 export const filterByAgency = (agency) =>
   agency ? projects.filter((p) => p.agency.includes(agency.match)) : projects

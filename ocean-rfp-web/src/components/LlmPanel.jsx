@@ -29,14 +29,14 @@ const CHIPS = [
   { key: 'budget', label: '예산이 큰 사업' },
 ]
 
-export default function LlmPanel() {
+export default function LlmPanel({ count = 4 }) {
   const [active, setActive] = useState('ai')
   const cur = QA[active]
   return (
     <aside className="glass llm">
       <div className="llmhead">
         <h2><span className="dot" />LLM 어시스턴트</h2>
-        <p>4개 사업 목록·메타정보 기준으로 답변합니다. 첫 화면 전용 (데모: 예시 질문).</p>
+        <p>{count}개 사업 목록·메타정보 기준으로 답변합니다.</p>
       </div>
       <div className="lb">
         <div className="bub q">{cur.q}</div>

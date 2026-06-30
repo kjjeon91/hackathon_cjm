@@ -1,4 +1,4 @@
-import { projects } from '../data/projects.js'
+import { projects, agencyColor } from '../data/projects.js'
 import { SearchIcon } from './icons.jsx'
 
 export default function ProjectList({ list, onOpen, agency, onClearAgency, query, setQuery }) {
@@ -34,9 +34,15 @@ export default function ProjectList({ list, onOpen, agency, onClearAgency, query
       ) : (
         list.map((p) => {
           const n = projects.findIndex((x) => x.id === p.id) + 1
+          const c = agencyColor(p.agency)
           return (
-            <button key={p.id} className="row" onClick={() => onOpen(p.id)}>
-              <span className="idx mono">{String(n).padStart(2, '0')}</span>
+            <button
+              key={p.id}
+              className="row"
+              onClick={() => onOpen(p.id)}
+              style={{ boxShadow: `inset 4px 0 0 ${c}` }}
+            >
+              <span className="idx mono" style={{ color: c }}>{String(n).padStart(2, '0')}</span>
               <span>
                 <span className="pname">{p.name}</span>
                 <span className="tagrow">
@@ -46,7 +52,10 @@ export default function ProjectList({ list, onOpen, agency, onClearAgency, query
                 </span>
               </span>
               <span className="bud">{p.budgetShort}</span>
-              <span className="ag">{p.agency}</span>
+              <span className="ag">
+                <span className="ag-dot" style={{ background: c }} />
+                {p.agency}
+              </span>
               <span className="go">→</span>
             </button>
           )

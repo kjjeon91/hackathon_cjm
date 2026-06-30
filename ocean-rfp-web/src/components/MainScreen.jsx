@@ -34,9 +34,8 @@ export default function MainScreen({ onOpen, agency, onClearAgency, now }) {
         <div>
           <div className="eyebrow">예보사업부 · Forecasting Division</div>
           <h1>예보사업부 RFP <em>통합 대시보드</em></h1>
-          <p>
-            분석된 제안요청서의 사업요약·핵심 용어·원문을 한 화면에서 탐색합니다. 발주처
-            필터와 검색으로 원하는 사업을 빠르게 찾을 수 있습니다.
+          <p className="oneline">
+            분석된 제안요청서의 사업요약·핵심 용어·원문을 한 화면에서 탐색합니다. 발주처 필터와 검색으로 원하는 사업을 빠르게 찾을 수 있습니다.
           </p>
         </div>
         <div className="clock">
@@ -56,7 +55,7 @@ export default function MainScreen({ onOpen, agency, onClearAgency, now }) {
           query={query}
           setQuery={setQuery}
         />
-        <LlmPanel />
+        <LlmPanel count={list.length} />
       </div>
     </main>
   )

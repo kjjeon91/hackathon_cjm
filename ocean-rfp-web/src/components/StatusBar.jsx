@@ -17,7 +17,13 @@ export default function StatusBar({ agency, onAgency }) {
                   className={`agency-btn${agency && agency.label === a.label ? ' on' : ''}`}
                   onClick={() => onAgency(a)}
                   title={`${a.label} 사업만 보기`}
+                  style={
+                    agency && agency.label === a.label
+                      ? { background: a.color, borderColor: a.color, color: '#070b16' }
+                      : { color: a.color }
+                  }
                 >
+                  <span className="agency-dot" style={{ background: a.color }} />
                   {a.label}
                 </button>
               </span>
