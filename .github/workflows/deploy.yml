@@ -20,18 +20,24 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ocean-rfp-web
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
-      - run: bun install
-      - run: bun run build
+      - name: Install & build
+        working-directory: ocean-rfp-web
+        run: |
+          bun install
+          bun run build
+      # /hackathon_cjm/ocean_rfp_web/ 경로로 서빙되도록 하위 폴더에 배치
+      - name: Stage site under /ocean_rfp_web
+        run: |
+          rm -rf _site
+          mkdir -p _site/ocean_rfp_web
+          cp -r ocean-rfp-web/dist/. _site/ocean_rfp_web/
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: ocean-rfp-web/dist
+          path: _site
 
   deploy:
     needs: build
