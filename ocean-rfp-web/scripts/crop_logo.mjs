@@ -1,6 +1,7 @@
 // GeoSR 로고를 헤더용으로 크롭: GeoSR + 지구본 + "GeoSystem Research Corporation"만 남기고
 // 하단(|주|지오시스템리서치, www.GeoSR.com)은 제거 → src/assets/geosr-logo.png
 // 원본 좌표(2362x1456)에서 직접 추출. (sharp trim은 투명 PNG에서 오작동하여 사용 안 함)
+// ※ sharp는 배포 빌드에 불필요해 deps에서 제외함 — 로고 재생성 시에만 `bun add -d sharp` 후 실행
 import sharp from 'sharp'
 import { resolve, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
