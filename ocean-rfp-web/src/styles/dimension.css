@@ -115,8 +115,15 @@ h1 em { font-style: normal; color: var(--blue); }
 
 /* ---------- main 2-col aligned to deck (목록 3칸 + LLM 1칸) ---------- */
 .layout { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; align-items: stretch; }
-.layout > .glass:not(.llm) { grid-column: span 3; min-width: 0; }
+.layout > .glass:not(.llm) { grid-column: span 3; min-width: 0; display: flex; flex-direction: column; }
 .layout > .llm { grid-column: span 1; }
+/* 행 영역만 스크롤 (데이터 증가 대비) — 헤더/필터바는 고정 */
+.rowlist { flex: 1 1 auto; min-height: 0; max-height: 62vh; overflow-y: auto; }
+.rowlist::-webkit-scrollbar { width: 10px; }
+.rowlist::-webkit-scrollbar-track { background: transparent; }
+.rowlist::-webkit-scrollbar-thumb { background: var(--mist); border-radius: 8px; border: 2px solid var(--white); }
+.rowlist::-webkit-scrollbar-thumb:hover { background: var(--steel); }
+.rowlist { scrollbar-width: thin; scrollbar-color: var(--mist) transparent; }
 
 /* ---------- list panel ---------- */
 .panelhead { display: flex; align-items: center; justify-content: space-between; padding: 18px 22px; border-bottom: 1px solid var(--fog); }

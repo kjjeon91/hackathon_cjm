@@ -68,6 +68,7 @@ export default function ProjectList({ list, onOpen, agencies = [], onAgency, onC
         )}
       </div>
 
+      <div className="rowlist">
       {list.length === 0 ? (
         <div className="empty">검색 결과가 없습니다.</div>
       ) : (
@@ -100,6 +101,7 @@ export default function ProjectList({ list, onOpen, agencies = [], onAgency, onC
           )
         })
       )}
+      </div>
     </div>
   )
 }
