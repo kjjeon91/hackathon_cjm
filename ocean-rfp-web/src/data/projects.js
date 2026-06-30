@@ -14,6 +14,16 @@ export const projects = data.map((p) => ({ ...p, ...AUGMENT[p.id] }))
 
 export const getProject = (id) => projects.find((p) => p.id === id)
 
+// 상단바 기관 필터 (label=표시명, match=agency 포함 매칭)
+export const AGENCIES = [
+  { label: '국립해양조사원', match: '해양조사원' }, // coast, satellite
+  { label: '수산과학원', match: '수산과학원' }, // ecology
+  { label: 'KIMST', match: 'KIMST' }, // ai
+]
+
+export const filterByAgency = (agency) =>
+  agency ? projects.filter((p) => p.agency.includes(agency.match)) : projects
+
 // KPI 덱 집계
 export const kpis = {
   count: projects.length,

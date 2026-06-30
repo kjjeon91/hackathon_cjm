@@ -61,6 +61,14 @@ button { font-family: inherit; cursor: pointer; }
 .sbt { color: #8fa6cb; border: 1px solid rgba(150, 180, 235, 0.16); padding: 5px 10px; border-radius: 7px; }
 .sbt.live { color: var(--cy2); border-color: rgba(90, 235, 215, 0.3); }
 .sb-r { display: flex; align-items: center; gap: 18px; font-size: 11px; color: var(--muted2); }
+.agencies { display: flex; align-items: center; gap: 4px; font-size: 11px; }
+.agencies .sep { color: #44597a; margin: 0 2px; }
+.agency-btn { background: transparent; border: 1px solid transparent; border-radius: 999px; color: var(--muted2); font-size: 11px; font-weight: 600; padding: 5px 11px; transition: all 0.15s; }
+.agency-btn:hover { color: var(--cy2); border-color: rgba(90, 235, 215, 0.3); background: rgba(90, 235, 215, 0.06); }
+.agency-btn.on { color: #070b16; background: linear-gradient(135deg, #3ddccb, #7a8cff); border-color: transparent; font-weight: 800; }
+.filteron { font-size: 12px; font-weight: 700; color: var(--cy2); margin-left: 8px; }
+.clearfilter { color: var(--vi); border-color: rgba(140, 160, 255, 0.3); cursor: pointer; }
+.clearfilter:hover { background: rgba(111, 123, 255, 0.1); }
 .online { display: inline-flex; align-items: center; gap: 6px; color: var(--cy2); }
 .online::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--cy); box-shadow: 0 0 10px var(--cy); }
 

@@ -3,6 +3,7 @@ import StatusBar from './components/StatusBar.jsx'
 import MainScreen from './components/MainScreen.jsx'
 import SummaryScreen from './components/SummaryScreen.jsx'
 import OriginalScreen from './components/OriginalScreen.jsx'
+import { AGENCIES } from './data/projects.js'
 
 export default function App() {
   // 표출 전용 상태 기반 라우팅: main → summary → original
@@ -14,6 +15,16 @@ export default function App() {
     if ((screen === 'summary' || screen === 'original') && id) return { screen, id }
     return { screen: 'main', id: null }
   })
+
+  // 상단바 기관 클릭 → 목록 화면에서 해당 기관 사업만 필터 (재클릭 시 해제)
+  const [agency, setAgency] = useState(() => {
+    const a = new URLSearchParams(window.location.search).get('agency')
+    return a ? AGENCIES.find((x) => x.label === a) || null : null
+  })
+  const selectAgency = (a) => {
+    setAgency((prev) => (prev && prev.label === a.label ? null : a))
+    setView({ screen: 'main', id: null })
+  }
 
   const goMain = () => setView({ screen: 'main', id: null })
   const openSummary = (id) => setView({ screen: 'summary', id })
@@ -28,8 +39,10 @@ export default function App() {
       <div className="bg-glow" />
       <div className="bg-grid" />
       <div className="app">
-        <StatusBar />
-        {view.screen === 'main' && <MainScreen onOpen={openSummary} />}
+        <StatusBar agency={agency} onAgency={selectAgency} />
+        {view.screen === 'main' && (
+          <MainScreen onOpen={openSummary} agency={agency} onClearAgency={() => setAgency(null)} />
+        )}
         {view.screen === 'summary' && (
           <SummaryScreen id={view.id} onBack={goMain} onOriginal={openOriginal} />
         )}

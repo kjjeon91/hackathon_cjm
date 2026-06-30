@@ -2,7 +2,7 @@ import KpiDeck from './KpiDeck.jsx'
 import ProjectList from './ProjectList.jsx'
 import LlmPanel from './LlmPanel.jsx'
 
-export default function MainScreen({ onOpen }) {
+export default function MainScreen({ onOpen, agency, onClearAgency }) {
   return (
     <main>
       <div className="head">
@@ -23,7 +23,7 @@ export default function MainScreen({ onOpen }) {
       <KpiDeck />
 
       <div className="layout">
-        <ProjectList onOpen={onOpen} />
+        <ProjectList onOpen={onOpen} agency={agency} onClearAgency={onClearAgency} />
         <LlmPanel />
       </div>
     </main>

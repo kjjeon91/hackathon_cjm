@@ -115,9 +115,43 @@ function normalizeOriginal(text) {
   out = out.replace(/([A-Za-z])[ \t]*\n{1,2}[ \t]*(\d{4})\b/g, '$1 $2') // "EurOtop\n\n2018"
   out = out.replace(/SSP[ ]?(\d+-\d+)\.[ \t]*\n{1,2}[ \t]*(\d+)\)/g, 'SSP $1.$2)') // "SSP 5-8.\n\n5)"
 
-  // 3) 과도한 빈 줄 정리
+  // 3) 표/줄바꿈 재결합 — 블록 시작이 아닌 줄을 앞 줄에 이어붙임
+  out = joinWrapped(out)
+
+  // 4) 과도한 빈 줄 정리
   out = out.replace(/\n{3,}/g, '\n\n')
   return out.trim()
+}
+
+// 새 블록(글머리표·번호·소제목·붙임·법령)을 시작하는 줄인지
+function isBlockStart(line) {
+  const t = line.replace(/^\s+/, '')
+  if (t === '') return true
+  return (
+    /^[○◦●▷▶·•\-*※□ㅇ◇]/.test(t) || // 글머리표/기호
+    /^\d+[.)]/.test(t) || // 1. 1)
+    /^\d+-\d+[.)]/.test(t) || // 2-1)
+    /^[가-힣]\.\s/.test(t) || // 가. 나. 다.
+    /^[ⅠⅡⅢⅣⅤⅥⅦⅧⅨⅩ]+\./.test(t) || // 로마숫자 소제목
+    /^\[/.test(t) || // [붙임 …]
+    /^[「『]/.test(t) // 법령명
+  )
+}
+
+// 마커 없는 줄을 직전 줄에 이어붙여 가독성 개선 (빈 줄은 단락 구분으로 보존)
+function joinWrapped(text) {
+  const out = []
+  for (const raw of text.split('\n')) {
+    const line = raw.replace(/\s+$/, '')
+    if (line.trim() === '') { out.push(''); continue }
+    const prev = out[out.length - 1]
+    if (out.length === 0 || prev === '' || isBlockStart(line)) {
+      out.push(line)
+    } else {
+      out[out.length - 1] = prev + ' ' + line.trim()
+    }
+  }
+  return out.join('\n')
 }
 
 // 기본정보 표: | 항목 | 값 |
