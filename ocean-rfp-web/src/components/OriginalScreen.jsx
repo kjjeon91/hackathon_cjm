@@ -24,13 +24,15 @@ function lineClass(t) {
   return 'ol-p'
 }
 
-// 표 추출 잔해(추진일정표 등) 감지 — 표 구조가 깨져 한 줄로 뭉친 라인
+// 표 추출 잔해 감지 — 표 구조가 깨져 한 줄로 뭉친 라인 (내용 마커 기반, 본문 오검출 방지)
 function isTableDump(t) {
-  if (/추진\s*일정\s*\(개월\)|공정\s*\(%\)|누계\s*공정/.test(t)) return true
-  if (t.length > 180) {
-    const digits = (t.match(/\d/g) || []).length
-    if (digits / t.length > 0.12) return true
-  }
+  if (/추진\s*일정\s*\(개월\)|공정\s*\(%\)|누계\s*공정/.test(t)) return true // 추진일정표
+  if (/중앙행정기관명|전체 연구개발기간|연구개발과제명/.test(t)) return true // RFP 개요표
+  if (/구분\s+항목\s+비고/.test(t)) return true // 자료목록표
+  if (/활용\s*위성\s*\/\s*서비스|산출물\s*명\s*활용/.test(t)) return true // 위성 산출물표 헤더
+  // 위성/센서 코드가 3종 이상 나열 → 위성 산출물표 본문
+  const codes = (t.match(/GK-2[AB]|Sentinel|MODIS|VIIRS|CMEMS|Landsat|NOAA|Aqua|Terra|Suomi|GCOM|GPM|Skysat|Worldview|Pleiades/g) || []).length
+  if (codes >= 3) return true
   return false
 }
 

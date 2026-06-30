@@ -18,9 +18,9 @@ function matches(p, q) {
 
 const pad = (n) => String(n).padStart(2, '0')
 
-export default function MainScreen({ onOpen, agency, onClearAgency, now }) {
+export default function MainScreen({ onOpen, agencies, onClearAgency, now }) {
   const [query, setQuery] = useState('')
-  const list = filterByAgency(agency).filter((p) => matches(p, query))
+  const list = filterByAgency(agencies).filter((p) => matches(p, query))
 
   const hh = pad(now.getHours())
   const mm = pad(now.getMinutes())
@@ -50,7 +50,7 @@ export default function MainScreen({ onOpen, agency, onClearAgency, now }) {
         <ProjectList
           list={list}
           onOpen={onOpen}
-          agency={agency}
+          agencies={agencies}
           onClearAgency={onClearAgency}
           query={query}
           setQuery={setQuery}

@@ -1,7 +1,8 @@
 import { AGENCIES } from '../data/projects.js'
 import logo from '../assets/geosr-logo.png'
 
-export default function StatusBar({ agency, onAgency }) {
+export default function StatusBar({ agencies = [], onAgency }) {
+  const isOn = (a) => agencies.some((x) => x.label === a.label)
   return (
     <header className="statusbar">
       <div className="statusbar-inner">
@@ -14,11 +15,11 @@ export default function StatusBar({ agency, onAgency }) {
               <span key={a.label}>
                 {i > 0 && <span className="sep">·</span>}
                 <button
-                  className={`agency-btn${agency && agency.label === a.label ? ' on' : ''}`}
+                  className={`agency-btn${isOn(a) ? ' on' : ''}`}
                   onClick={() => onAgency(a)}
-                  title={`${a.label} 사업만 보기`}
+                  title={`${a.label} 사업 필터 (다중 선택 가능)`}
                   style={
-                    agency && agency.label === a.label
+                    isOn(a)
                       ? { background: a.color, borderColor: a.color, color: '#070b16' }
                       : { color: a.color }
                   }

@@ -1,17 +1,19 @@
 import { projects, agencyColor } from '../data/projects.js'
 import { SearchIcon } from './icons.jsx'
 
-export default function ProjectList({ list, onOpen, agency, onClearAgency, query, setQuery }) {
+export default function ProjectList({ list, onOpen, agencies = [], onClearAgency, query, setQuery }) {
   return (
     <div className="glass">
       <div className="panelhead">
         <h2>
           <span className="k">› </span>프로젝트 목록
-          {agency && <span className="filteron">· {agency.label}</span>}
+          {agencies.length > 0 && (
+            <span className="filteron">· {agencies.map((a) => a.label).join(', ')}</span>
+          )}
           <span className="cnt">{list.length}건</span>
         </h2>
         <div className="searchwrap">
-          {agency && (
+          {agencies.length > 0 && (
             <button className="clearfilter" onClick={onClearAgency} title="기관 필터 해제">✕ 기관</button>
           )}
           <div className="search">

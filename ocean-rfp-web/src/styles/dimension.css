@@ -104,8 +104,10 @@ h1 em { font-style: normal; background: linear-gradient(110deg, var(--cy2), var(
 .kpi .v small { font-size: 14px; color: var(--cy2); font-weight: 700; }
 .kpi.hi { background: linear-gradient(135deg, rgba(111, 123, 255, 0.22), rgba(61, 220, 203, 0.12)); border-color: rgba(130, 150, 255, 0.3); }
 
-/* --- main two-column layout --- */
-.layout { display: grid; grid-template-columns: minmax(0, 1fr) 388px; gap: 20px; align-items: start; }
+/* --- main layout: 상단 KPI 4칸 그리드와 동일 정렬 (목록 3칸 + LLM 1칸) --- */
+.layout { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; align-items: start; }
+.layout > .glass:not(.llm) { grid-column: span 3; min-width: 0; }
+.layout > .llm { grid-column: span 1; }
 
 /* --- list panel --- */
 .panelhead { display: flex; align-items: center; justify-content: space-between; padding: 18px 22px; border-bottom: 1px solid rgba(150, 180, 235, 0.1); }
@@ -228,6 +230,7 @@ h1 em { font-style: normal; background: linear-gradient(110deg, var(--cy2), var(
 @media (max-width: 1100px) {
   main { padding: 24px 18px 48px; }
   .layout { grid-template-columns: 1fr; }
+  .layout > .glass:not(.llm), .layout > .llm { grid-column: auto; }
   .deck { grid-template-columns: repeat(2, 1fr); }
   .metas { grid-template-columns: repeat(2, 1fr); }
   .info-grid, .term-grid { grid-template-columns: 1fr; }

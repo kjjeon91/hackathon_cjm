@@ -16,15 +16,24 @@ export default function App() {
     return { screen: 'main', id: null }
   })
 
-  // 상단바 기관 클릭 → 목록 화면에서 해당 기관 사업만 필터 (재클릭 시 해제)
-  const [agency, setAgency] = useState(() => {
-    const a = new URLSearchParams(window.location.search).get('agency')
-    return a ? AGENCIES.find((x) => x.label === a) || null : null
+  // 상단바 기관 다중 선택(중복 클릭으로 여러 기관 동시 필터, 재클릭 시 해제)
+  const [agencies, setAgencies] = useState(() => {
+    const q = new URLSearchParams(window.location.search).get('agency')
+    if (!q) return []
+    return q
+      .split(',')
+      .map((label) => AGENCIES.find((x) => x.label === label))
+      .filter(Boolean)
   })
   const selectAgency = (a) => {
-    setAgency((prev) => (prev && prev.label === a.label ? null : a))
+    setAgencies((prev) =>
+      prev.some((x) => x.label === a.label)
+        ? prev.filter((x) => x.label !== a.label)
+        : [...prev, a],
+    )
     setView({ screen: 'main', id: null })
   }
+  const clearAgencies = () => setAgencies([])
 
   const goMain = () => setView({ screen: 'main', id: null })
   const openSummary = (id) => setView({ screen: 'summary', id })
@@ -46,12 +55,12 @@ export default function App() {
       <div className="bg-glow" />
       <div className="bg-grid" />
       <div className="app">
-        <StatusBar agency={agency} onAgency={selectAgency} />
+        <StatusBar agencies={agencies} onAgency={selectAgency} />
         {view.screen === 'main' && (
           <MainScreen
             onOpen={openSummary}
-            agency={agency}
-            onClearAgency={() => setAgency(null)}
+            agencies={agencies}
+            onClearAgency={clearAgencies}
             now={now}
           />
         )}

@@ -25,8 +25,11 @@ export const AGENCIES = [
 export const agencyColor = (agency) =>
   (AGENCIES.find((a) => agency.includes(a.match)) || {}).color || '#7d93b8'
 
-export const filterByAgency = (agency) =>
-  agency ? projects.filter((p) => p.agency.includes(agency.match)) : projects
+// 다중 선택: 선택된 기관 배열 중 하나라도 일치하면 표시 (빈 배열=전체)
+export const filterByAgency = (agencies) =>
+  !agencies || agencies.length === 0
+    ? projects
+    : projects.filter((p) => agencies.some((a) => p.agency.includes(a.match)))
 
 // 목록의 예산 합계(억) — budgetShort("25억" 등) 파싱·합산
 export const sumBudgetEok = (list) => {
